@@ -6,38 +6,27 @@ let continuarComprando = false;
 //var precio total
 let precioTotal = 0;
 
-//Constantes de precio y stock
+//Objetos - nombre, precio y stock
+function Producto(nombre,precio,stock){
+    this.nombre = nombre;
+    this.precio = precio;
+    this.stock = stock;
+}
 
-//Maquillaje precio
-const precioMascaraPestaña = 15;
-const precioBroncer = 17;
-const precioBase = 18;
+//Maquillaje
+let mascaraPestaña = new Producto('Mascara de pestaña',15,20);
+let broncer = new Producto('Broncer',17,10);
+let base = new Producto('Base',18,10);
 
-//Maquillaje stock
-let stockMascaraPestaña = 20;
-let stockBroncer = 10;
-let stockBase = 10;
+//Perfume
+let perfumeHombre = new Producto('Perfume de hombre',48,8);
+let perfumeMujer = new Producto('Perfume de mujer',52,7);
+let perfumeBebe = new Producto('Perfume de bebe',63,9);
 
-//Perfumes precio
-const precioPerfumeMujer = 52;
-const precioPerfumeHombre = 48;
-const precioPerfumeBebe = 63;
-
-//Perfumes stock
-let stockPerfumeMujer = 7;
-let stockPerfumeHombre = 8;
-let stockPerfumeBebe = 9;
-
-//Skincare precio
-const precioAguaMicelar = 7;
-const precioAguaBifasica = 12;
-const precioCremaHumectante = 9;
-
-//Skincare stock
-let stockAguaMicelar = 18;
-let stockAguaBifasica = 19
-let stockCremaHumectante = 17;
-
+//Skincare
+let aguaMicelar = new Producto('Agua micelar',7,18);
+let aguaBifasica = new Producto('Agua bifasica',12,19);
+let cremaHumectante = new Producto('Crema humectante',9,17);
 
 //constantes de operaciones
 const suma = (a,b) => (a+b);
@@ -66,9 +55,9 @@ do{
                 //if y case para eleccion de producto a comprar
                 if (eleccionProductoEspecifico <= 4){
                     switch (eleccionProductoEspecifico){
-                        case '1': stockMascaraPestaña = comprar(precioMascaraPestaña,stockMascaraPestaña);break;
-                        case '2': stockBroncer = comprar(precioBroncer,stockBroncer);break;
-                        case '3': stockBase = comprar(precioBase,stockBase);break;
+                        case '1': mascaraPestaña.stock = comprar(mascaraPestaña.precio,mascaraPestaña.stock);break;
+                        case '2': broncer.stock = comprar(broncer.precio,broncer.stock);break;
+                        case '3': base.stock = comprar(base.precio,base.stock);break;
                         case '4': break;
                     }
                 }
@@ -79,9 +68,9 @@ do{
                 //if y case para eleccion de producto a comprar
                 if (eleccionProductoEspecifico <= 4){
                     switch (eleccionProductoEspecifico){
-                        case '1': stockPerfumeMujer = comprar(precioPerfumeMujer,stockPerfumeMujer);break;
-                        case '2': stockPerfumeHombre = comprar(precioPerfumeHombre,stockPerfumeHombre);break;
-                        case '3': stockPerfumeBebe = comprar(precioPerfumeBebe,stockPerfumeBebe);break;
+                        case '1': perfumeMujer.stock = comprar(perfumeMujer.precio,perfumeMujer.stock);break;
+                        case '2': perfumeHombre.stock = comprar(perfumeHombre.precio,perfumeHombre.stock);break;
+                        case '3': perfumeBebe.stock = comprar(perfumeBebe.precio,perfumeBebe.stock);break;
                         case '4': break;
                     }
                 }
@@ -92,9 +81,9 @@ do{
                 // if y case para eleccion de producto a comprar
                 if (eleccionProductoEspecifico <= 4){
                     switch (eleccionProductoEspecifico){
-                        case '1': stockAguaMicelar = comprar(precioAguaMicelar,stockAguaMicelar);break;
-                        case '2': stockAguaBifasica = comprar(precioAguaBifasica,stockAguaBifasica);break;
-                        case '3': stockCremaHumectante = comprar(precioCremaHumectante,stockCremaHumectante);break;
+                        case '1': aguaMicelar.stock = comprar(aguaMicelar.precio,aguaMicelar.stock);break;
+                        case '2': aguaBifasica.stock = comprar(aguaBifasica.precio,aguaBifasica.stock);break;
+                        case '3': cremaHumectante.stock = comprar(cremaHumectante.precio,cremaHumectante.stock);break;
                         case '4': break;
                     }
                 }
@@ -198,4 +187,3 @@ function cuotas(){
         }
     }while (cantidadCuotas == '0');
 }
-
