@@ -1,10 +1,10 @@
 alert('Bienvenido/a a ¡DeDe MakeUp!');
 
 //var seguir comprando
-var continuarComprando = false;
+let continuarComprando = false;
 
 //var precio total
-var precioTotal = 0;
+let precioTotal = 0;
 
 //Constantes de precio y stock
 
@@ -14,9 +14,9 @@ const precioBroncer = 17;
 const precioBase = 18;
 
 //Maquillaje stock
-var stockMascaraPestaña = 20;
-var stockBroncer = 10;
-var stockBase = 10;
+let stockMascaraPestaña = 20;
+let stockBroncer = 10;
+let stockBase = 10;
 
 //Perfumes precio
 const precioPerfumeMujer = 52;
@@ -24,9 +24,9 @@ const precioPerfumeHombre = 48;
 const precioPerfumeBebe = 63;
 
 //Perfumes stock
-var stockPerfumeMujer = 7;
-var stockPerfumeHombre = 8;
-var stockPerfumeBebe = 9;
+let stockPerfumeMujer = 7;
+let stockPerfumeHombre = 8;
+let stockPerfumeBebe = 9;
 
 //Skincare precio
 const precioAguaMicelar = 7;
@@ -34,9 +34,9 @@ const precioAguaBifasica = 12;
 const precioCremaHumectante = 9;
 
 //Skincare stock
-var stockAguaMicelar = 18;
-var stockAguaBifasica = 19
-var stockCremaHumectante = 17;
+let stockAguaMicelar = 18;
+let stockAguaBifasica = 19
+let stockCremaHumectante = 17;
 
 
 //constantes de operaciones
