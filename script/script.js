@@ -11,6 +11,9 @@ function Producto(nombre,precio,stock){
     this.nombre = nombre;
     this.precio = precio;
     this.stock = stock;
+    this.detalle = function(){
+        alert('Producto: '+this.nombre+'\nPrecio: $'+this.precio+'\nStock: '+this.stock);
+    }
 }
 
 //Maquillaje
@@ -36,6 +39,11 @@ const multiplicar = (a,b) => (a*b);
 //a es el monto y b es el porcentaje de interes a aplicar
 const interes = (a,b) => ((a*(b/100))+a);
 
+//array lista de productos comprados
+let listaCompra = [];
+let cantidadProductosDiferentesComprados = 0;
+
+
 //inicio de programa
 do{
 
@@ -55,9 +63,21 @@ do{
                 //if y case para eleccion de producto a comprar
                 if (eleccionProductoEspecifico <= 4){
                     switch (eleccionProductoEspecifico){
-                        case '1': mascaraPestaña.stock = comprar(mascaraPestaña.precio,mascaraPestaña.stock);break;
-                        case '2': broncer.stock = comprar(broncer.precio,broncer.stock);break;
-                        case '3': base.stock = comprar(base.precio,base.stock);break;
+                        case '1':
+                            mascaraPestaña.detalle();//muestro detalles del producto
+                            mascaraPestaña.stock = comprar(mascaraPestaña.precio,mascaraPestaña.stock);//cambio el stock de los productos comprados
+                            cantidadProductosDiferentesComprados = facturaCompra(mascaraPestaña.nombre,cantidadProductosDiferentesComprados);//agrego el elemento comprado a una lista para mostrar al final
+                            break;
+                        case '2':
+                            broncer.detalle();
+                            broncer.stock = comprar(broncer.precio,broncer.stock);
+                            cantidadProductosDiferentesComprados = facturaCompra(broncer.nombre,cantidadProductosDiferentesComprados);
+                            break;
+                        case '3':
+                            base.detalle();
+                            base.stock = comprar(base.precio,base.stock);
+                            cantidadProductosDiferentesComprados = facturaCompra(base.nombre,cantidadProductosDiferentesComprados);
+                            break;
                         case '4': break;
                     }
                 }
@@ -68,9 +88,21 @@ do{
                 //if y case para eleccion de producto a comprar
                 if (eleccionProductoEspecifico <= 4){
                     switch (eleccionProductoEspecifico){
-                        case '1': perfumeMujer.stock = comprar(perfumeMujer.precio,perfumeMujer.stock);break;
-                        case '2': perfumeHombre.stock = comprar(perfumeHombre.precio,perfumeHombre.stock);break;
-                        case '3': perfumeBebe.stock = comprar(perfumeBebe.precio,perfumeBebe.stock);break;
+                        case '1':
+                            perfumeMujer.detalle();
+                            perfumeMujer.stock = comprar(perfumeMujer.precio,perfumeMujer.stock);
+                            cantidadProductosDiferentesComprados = facturaCompra(perfumeMujer.nombre,cantidadProductosDiferentesComprados);
+                            break;
+                        case '2':
+                            perfumeHombre.detalle();
+                            perfumeHombre.stock = comprar(perfumeHombre.precio,perfumeHombre.stock);
+                            cantidadProductosDiferentesComprados = facturaCompra(perfumeHombre.nombre,cantidadProductosDiferentesComprados);
+                            break;
+                        case '3':
+                            perfumeBebe.detalle();
+                            perfumeBebe.stock = comprar(perfumeBebe.precio,perfumeBebe.stock);
+                            cantidadProductosDiferentesComprados = facturaCompra(perfumeBebe.nombre,cantidadProductosDiferentesComprados);
+                            break;
                         case '4': break;
                     }
                 }
@@ -81,9 +113,21 @@ do{
                 // if y case para eleccion de producto a comprar
                 if (eleccionProductoEspecifico <= 4){
                     switch (eleccionProductoEspecifico){
-                        case '1': aguaMicelar.stock = comprar(aguaMicelar.precio,aguaMicelar.stock);break;
-                        case '2': aguaBifasica.stock = comprar(aguaBifasica.precio,aguaBifasica.stock);break;
-                        case '3': cremaHumectante.stock = comprar(cremaHumectante.precio,cremaHumectante.stock);break;
+                        case '1':
+                            aguaMicelar.detalle();
+                            aguaMicelar.stock = comprar(aguaMicelar.precio,aguaMicelar.stock);
+                            cantidadProductosDiferentesComprados = facturaCompra(aguaMicelar.nombre,cantidadProductosDiferentesComprados);
+                            break;
+                        case '2':
+                            aguaBifasica.detalle();
+                            aguaBifasica.stock = comprar(aguaBifasica.precio,aguaBifasica.stock);
+                            cantidadProductosDiferentesComprados = facturaCompra(aguaBifasica.nombre,cantidadProductosDiferentesComprados);
+                            break;
+                        case '3':
+                            cremaHumectante.detalle();
+                            cremaHumectante.stock = comprar(cremaHumectante.precio,cremaHumectante.stock);
+                            cantidadProductosDiferentesComprados = facturaCompra(cremaHumectante.nombre,cantidadProductosDiferentesComprados);
+                            break;
                         case '4': break;
                     }
                 }
@@ -113,6 +157,7 @@ do{
 
 //inica la pregunta de cuotas si es que el usuario ha realizado alguna compra
 if (precioTotal>0){
+    mostrarFactura(listaCompra,cantidadProductosDiferentesComprados);
     cuotas();
 }
 alert('Gracias por su visita');
@@ -126,9 +171,9 @@ alert('Gracias por su visita');
 function menu(op1,op2,op3,op4){
     let compra = prompt('1 - Deseo Comprar '+op1+'\n2 - Deseo comprar '+op2+'\n3 - Deseo comprar '+op3+'\n4 - Deseo '+op4);
     switch(compra){
-        case '1':alert('Desea comprar '+op1);return compra
-        case '2':alert('Desea comprar '+op2);return compra
-        case '3':alert('Desea comprar '+op3);return compra
+        case '1':alert('Entrando al menu de '+op1);return compra
+        case '2':alert('Entrando al menu de '+op2);return compra
+        case '3':alert('Entrando al menu de '+op3);return compra
         case '4':alert('Desea '+op4);return compra
         default: alert('El producto no esta en nuestra base de datos');return compra;
     }
@@ -140,10 +185,10 @@ function comprar(precioProducto,stockProducto){
     let cantidadAComprar = prompt('Que cantidad del producto desea comprar? Cuesta $'+precioProducto+' y disponemos de '+stockProducto+' unidades.')
     if (cantidadAComprar <= stockProducto){
         alert('Usted compro '+cantidadAComprar+' unidad/es');
-        stockProducto = stockProducto - cantidadAComprar
+        stockProducto -= cantidadAComprar;
         precioParcial = multiplicar(cantidadAComprar,precioProducto);
         alert('Suma un total de : $'+precioParcial);
-        precioTotal = precioTotal+precioParcial;
+        precioTotal += precioParcial;
         alert('Lleva comprando hasta ahora: $'+precioTotal);
     }else{
         alert('No disponemos esa cantidad')
@@ -187,3 +232,22 @@ function cuotas(){
         }
     }while (cantidadCuotas == '0');
 }
+
+//funcion para ir agregando a un arreglo los productos que se van comprando
+function facturaCompra (productoAdquirido,indice){
+    listaCompra[indice]=productoAdquirido;
+    indice = indice + 1;
+    console.log('estoy en factura compra'+indice)
+    return indice;
+}
+
+//funcion que muestra la lista de los productos adquiridos
+function mostrarFactura(listaProductos,indice){
+    let factura ='Los articulos adquiridos son:\n';
+    console.log('estoy en omnstrar factura')
+    for (let i=0; i < indice;i++){
+        factura = factura + listaProductos[i]+'\n';
+    }
+    alert(factura);
+}
+
