@@ -2,28 +2,41 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: black;
 }
 
-body {
-  background: linear-gradient(45deg, #e4a8ec, #ff9fef);
-}
-body main {
-  min-height: 100vh;
-  background-image: url("../img/DEDEBeauty.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+body header .logo {
   display: flex;
   justify-content: center;
-  align-items: center;
 }
-body main h1 {
-  background: linear-gradient(#e4a8ec, #d302b0);
-  border-radius: 15px;
-  padding: 20px;
-  transition: all 0.5s ease-in-out;
+body header .logo img {
+  width: 25%;
 }
-body main h1:hover {
-  transform: scale(1.5);
-  letter-spacing: 45px;
+body header nav {
+  background-color: rgba(27, 250, 27, 0.6666666667);
+}
+body .principal {
+  width: 100%;
+  display: flex;
+}
+body .principal .menuFiltros {
+  width: 25%;
+  background-color: rgba(85, 255, 85, 0.6666666667);
+  text-align: center;
+}
+body .principal .menuFiltros .filtroColoresFlores, body .principal .menuFiltros .filtroTipoArbustos, body .principal .menuFiltros .filtroTipoArboles {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 5px;
+}
+body .principal .menuFiltros .filtroColoresFlores .colorFlores, body .principal .menuFiltros .filtroTipoArbustos .colorFlores, body .principal .menuFiltros .filtroTipoArboles .colorFlores, body .principal .menuFiltros .filtroTipoArbustos .tipoArbusto, body .principal .menuFiltros .filtroTipoArboles .tipoArbusto, body .principal .menuFiltros .filtroTipoArboles .tipoArbol {
+  display: flex;
+  justify-content: start;
+}
+body .principal .menuFiltros .filtroColoresFlores .colorFlores input, body .principal .menuFiltros .filtroTipoArbustos .colorFlores input, body .principal .menuFiltros .filtroTipoArboles .colorFlores input, body .principal .menuFiltros .filtroTipoArbustos .tipoArbusto input, body .principal .menuFiltros .filtroTipoArboles .tipoArbusto input, body .principal .menuFiltros .filtroTipoArboles .tipoArbol input {
+  margin-right: 5px;
+}
+body .principal .catalogoVentas {
+  width: 80%;
+  min-height: 100vh;
 }/*# sourceMappingURL=style.css.map */

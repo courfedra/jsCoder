@@ -1,253 +1,149 @@
-alert('Bienvenido/a a ¡DeDe MakeUp!');
+//variable para saber si desea seguir comprando
+let seguirComprando = false;
 
-//var seguir comprando
-let continuarComprando = false;
+//variable para saber si su busqueda esta dentro de las opciones ofrecidas
+let esValido = false;
 
-//var precio total
-let precioTotal = 0;
+/*variable para llevar cuenta de la cantidad de veces que ha comprado, no de articulos invididuales*/
+let cantidadDeCompras=0;
+
+//array para guardar los detalles de la compra realizada --individual
+let compraRealizada = [];
+
+//array para guardar los detalles de toda la compra realizada --total
+let carrito=[];
 
 //Objetos - nombre, precio y stock
 function Producto(nombre,precio,stock){
     this.nombre = nombre;
     this.precio = precio;
-    this.stock = stock;
-    this.detalle = function(){
-        alert('Producto: '+this.nombre+'\nPrecio: $'+this.precio+'\nStock: '+this.stock);
-    }
+    this.stock = stock||0;
 }
 
-//Maquillaje
-let mascaraPestaña = new Producto('Mascara de pestaña',15,20);
-let broncer = new Producto('Broncer',17,10);
-let base = new Producto('Base',18,10);
-
-//Perfume
-let perfumeHombre = new Producto('Perfume de hombre',48,8);
-let perfumeMujer = new Producto('Perfume de mujer',52,7);
-let perfumeBebe = new Producto('Perfume de bebe',63,9);
-
-//Skincare
-let aguaMicelar = new Producto('Agua micelar',7,18);
-let aguaBifasica = new Producto('Agua bifasica',12,19);
-let cremaHumectante = new Producto('Crema humectante',9,17);
-
-//constantes de operaciones
-const suma = (a,b) => (a+b);
-const resta = (a,b) => (a-b);
-const multiplicar = (a,b) => (a*b);
-
-//a es el monto y b es el porcentaje de interes a aplicar
-const interes = (a,b) => ((a*(b/100))+a);
-
-//array lista de productos comprados
-let listaCompra = [];
-let cantidadProductosDiferentesComprados = 0;
+//Flores,Arbustos y Arboles
+let productoA = new Producto('roja',120,70);
+let productoB = new Producto('blanca',150,30);
+let productoC = new Producto('azul',100,50);
+let productoD = new Producto('amarilla',200,0);
+let productoE = new Producto('naranja',1500,25);
+let productoF = new Producto('rosa',1000,25);
 
 
-//inicio de programa
+//INICIO DE PROGRAMA
+alert('Bienvenidos a La Arboleria');
+let opcionElegida='';
+let indiceDeOpcionElegida=0;
 do{
+    //Arrays con productos completos
+    let listaProductosCompleta = [productoA,productoB,productoC,productoD,productoE,productoF];
 
-    //Menu general
-    let eleccionProductoGeneral = menu('maquillaje','perfumes','skincare','salir');
+    //array para agregar los productos con stock
+    let listaNombresProductos = [];
 
-    //var producto interno
-    let eleccionProductoEspecifico;
+    //filtro los productos con stock
+    listaNombresProductos = listaProductosCompleta.filter((elemento)=>elemento.stock>0);
 
-    //si la opcion no es mayor a 4 ni menor a 1 entra al bucle del menu elegido
-    if ((eleccionProductoGeneral <= '4')&&(eleccionProductoGeneral>'0')){
-        continuarComprando = true;
-        switch (eleccionProductoGeneral){
+    //array para agregar la lista de nombres productos con stock
+    let listaProductosConStock = [];
 
-            case '1':
-                eleccionProductoEspecifico = menu('Mascara de pestaña','Broncer','Base','Salir');
-                //if y case para eleccion de producto a comprar
-                if (eleccionProductoEspecifico <= 4){
-                    switch (eleccionProductoEspecifico){
-                        case '1':
-                            mascaraPestaña.detalle();//muestro detalles del producto
-                            mascaraPestaña.stock = comprar(mascaraPestaña.precio,mascaraPestaña.stock);//cambio el stock de los productos comprados
-                            cantidadProductosDiferentesComprados = facturaCompra(mascaraPestaña.nombre,cantidadProductosDiferentesComprados);//agrego el elemento comprado a una lista para mostrar al final
-                            break;
-                        case '2':
-                            broncer.detalle();
-                            broncer.stock = comprar(broncer.precio,broncer.stock);
-                            cantidadProductosDiferentesComprados = facturaCompra(broncer.nombre,cantidadProductosDiferentesComprados);
-                            break;
-                        case '3':
-                            base.detalle();
-                            base.stock = comprar(base.precio,base.stock);
-                            cantidadProductosDiferentesComprados = facturaCompra(base.nombre,cantidadProductosDiferentesComprados);
-                            break;
-                        case '4': break;
-                    }
-                }
-                break;
-
-            case '2':
-                eleccionProductoEspecifico = menu('Perfume de Mujer','Perfume de Hombre','Perfume de Bebe','Salir');
-                //if y case para eleccion de producto a comprar
-                if (eleccionProductoEspecifico <= 4){
-                    switch (eleccionProductoEspecifico){
-                        case '1':
-                            perfumeMujer.detalle();
-                            perfumeMujer.stock = comprar(perfumeMujer.precio,perfumeMujer.stock);
-                            cantidadProductosDiferentesComprados = facturaCompra(perfumeMujer.nombre,cantidadProductosDiferentesComprados);
-                            break;
-                        case '2':
-                            perfumeHombre.detalle();
-                            perfumeHombre.stock = comprar(perfumeHombre.precio,perfumeHombre.stock);
-                            cantidadProductosDiferentesComprados = facturaCompra(perfumeHombre.nombre,cantidadProductosDiferentesComprados);
-                            break;
-                        case '3':
-                            perfumeBebe.detalle();
-                            perfumeBebe.stock = comprar(perfumeBebe.precio,perfumeBebe.stock);
-                            cantidadProductosDiferentesComprados = facturaCompra(perfumeBebe.nombre,cantidadProductosDiferentesComprados);
-                            break;
-                        case '4': break;
-                    }
-                }
-                break;
-
-            case '3':
-                eleccionProductoEspecifico = menu('Agua micelar','Agua Bifasica','Crema Humectante','Salir');
-                // if y case para eleccion de producto a comprar
-                if (eleccionProductoEspecifico <= 4){
-                    switch (eleccionProductoEspecifico){
-                        case '1':
-                            aguaMicelar.detalle();
-                            aguaMicelar.stock = comprar(aguaMicelar.precio,aguaMicelar.stock);
-                            cantidadProductosDiferentesComprados = facturaCompra(aguaMicelar.nombre,cantidadProductosDiferentesComprados);
-                            break;
-                        case '2':
-                            aguaBifasica.detalle();
-                            aguaBifasica.stock = comprar(aguaBifasica.precio,aguaBifasica.stock);
-                            cantidadProductosDiferentesComprados = facturaCompra(aguaBifasica.nombre,cantidadProductosDiferentesComprados);
-                            break;
-                        case '3':
-                            cremaHumectante.detalle();
-                            cremaHumectante.stock = comprar(cremaHumectante.precio,cremaHumectante.stock);
-                            cantidadProductosDiferentesComprados = facturaCompra(cremaHumectante.nombre,cantidadProductosDiferentesComprados);
-                            break;
-                        case '4': break;
-                    }
-                }
-                break;
-
-            case '4':
-                eleccionProductoEspecifico = 'Salir';
-                break;
-
-            default:
-                eleccionProductoEspecifico = 'Producto no encontrado';
-                alert('Vuelva a intentar');
-                break;
-        }
+    //Prepara una lista de solo los nombres de los productos que tienen stock
+    for(const producto of listaNombresProductos){
+        listaProductosConStock.push(producto.nombre);
     }
 
-    //si repito bucle
-    let salir = prompt('Usted esta por salir del sitio web de ¡DeDe MakeUp!\n¿Desea comprar algo mas?\n1 - SI\n2 - NO')
-    if ((salir.toLowerCase() == 'no') ||(salir.toLocaleLowerCase() == '2')){
-        continuarComprando = false;
+    //Menu para acceder a las opciones de compra
+    opcionElegida = menu(listaProductosConStock);
+
+    //Controlo si la opcion elegida esta incluida en la lista de flores a comprar
+    esValido = listaProductosConStock.some((elemento)=>elemento===opcionElegida);
+    
+    //Si es valido ejecuto la compra, sino pediremos si desea volver a comprar
+    if (esValido==true){
+        alert('Excelente, a mi teambien me gustan las  de color '+opcionElegida)
+        
+        //muestro caracteristicas del producto elegido y guardo el indice del producto
+        indiceDeOpcionElegida = mostrarCaracteristicas(opcionElegida,listaNombresProductos)
+        
+        //operacion de compra y actualizacion de stock
+        compraRealizada = comprar(indiceDeOpcionElegida,listaNombresProductos,opcionElegida)
+        cantidadDeCompras+=1;
+        actualizarFactura(compraRealizada,carrito,cantidadDeCompras);
     }else{
-        continuarComprando = true;
+        alert('Elegiste flores de color: '+opcionElegida+' y lamentablemente no lo tenemos en este momento.')
     }
 
-    //comprobar si quiere seguir comprando para renovar bucle
-}while (continuarComprando == true);
+    //valido si desea seguir comprando
+    seguirComprando=volverComprar();
 
-//inica la pregunta de cuotas si es que el usuario ha realizado alguna compra
-if (precioTotal>0){
-    mostrarFactura(listaCompra,cantidadProductosDiferentesComprados);
-    cuotas();
-}
-alert('Gracias por su visita');
+}while (seguirComprando == true);
 
-//Fin de programa
+//muestro toda la compra realizada por consola
+mostrarFactura(carrito);
 
-//*****************************************************************************************/
+alert('Gracias por su visita')
 
+//INICIO DE FUNCIONES
 
-//funcion de menu de eleccion de productos
-function menu(op1,op2,op3,op4){
-    let compra = prompt('1 - Deseo Comprar '+op1+'\n2 - Deseo comprar '+op2+'\n3 - Deseo comprar '+op3+'\n4 - Deseo '+op4);
-    switch(compra){
-        case '1':alert('Entrando al menu de '+op1);return compra
-        case '2':alert('Entrando al menu de '+op2);return compra
-        case '3':alert('Entrando al menu de '+op3);return compra
-        case '4':alert('Desea '+op4);return compra
-        default: alert('El producto no esta en nuestra base de datos');return compra;
-    }
+//funcion que muestra menu y retorna la opcion escrita
+function menu(opciones){
+    let eleccion = prompt('¿Que color de flor desea comprar?\n\n- '+opciones.join('\n- '));
+    return eleccion;
 };
 
-//funcion de comprar y control de stock
-function comprar(precioProducto,stockProducto){
-    let precioParcial = 0;
-    let cantidadAComprar = prompt('Que cantidad del producto desea comprar? Cuesta $'+precioProducto+' y disponemos de '+stockProducto+' unidades.')
-    if (cantidadAComprar <= stockProducto){
-        alert('Usted compro '+cantidadAComprar+' unidad/es');
-        stockProducto -= cantidadAComprar;
-        precioParcial = multiplicar(cantidadAComprar,precioProducto);
-        alert('Suma un total de : $'+precioParcial);
-        precioTotal += precioParcial;
-        alert('Lleva comprando hasta ahora: $'+precioTotal);
-    }else{
-        alert('No disponemos esa cantidad')
-    }
-    return stockProducto;
-}
-
-//funcion de pago sin interes y en cuotas con interes
-function cuotas(){
-    let cantidadCuotas;
-    do{
-        cantidadCuotas = prompt('¿Como desea pagar?\n1 - Contado\n2 - Cuotas')
-        if (cantidadCuotas == '1'){
-            alert('Estupendo, no le aplico interes\nSu monto a pagar es de $'+precioTotal)
-        }else if(cantidadCuotas == '2'){
-            //el usuario elige la cantidad de cuotas que desea utilizar para pagar el importe total
-            cantidadCuotas = prompt('¿En cuantas cuotas desea comprar?\n1 - Tres cuotas con 10% de interes\n2 - Seis cuotas con 20% de interes\n3 - Nueve cuotas con 30% de interes\n4 - Doce cuotas con 40% de interes')
-            let porcentajeInteres;
-            switch (cantidadCuotas){
-                case '1': porcentajeInteres = 10;break;
-                case '2': porcentajeInteres = 20;break;
-                case '3': porcentajeInteres = 30;break;
-                case '4': porcentajeInteres = 40;break;
-                default: porcentajeInteres = 0;break;
-            }
-
-            if (porcentajeInteres != 0){
-                //aplico interes al precio total
-                precioTotal = interes(precioTotal,porcentajeInteres);
-                alert('Su monto total es de $'+precioTotal);
-
-                //informa cantidad de cuotas y precio de cada cuota
-                alert('Debera pagar '+(cantidadCuotas*3)+' cuotas de $'+(precioTotal/(cantidadCuotas*3))+' cada una.')
-            }else{
-                cantidadCuotas=0;
-                alert('Opcion no valida, elija nuevamente su forma de pago');
-            }
-        }else{
-            alert('Opcion no valida')
-            cantidadCuotas = 0;
+//Funcion para mostrar caracteristicas del producto elegido
+function mostrarCaracteristicas(opcion,array){
+    for(i=0;i < (array.length);i++){
+        if (array[i].nombre==opcion){
+            break;
         }
-    }while (cantidadCuotas == '0');
+    };
+    alert('Las flores de color '+array[i].nombre+' tiene la siguiente informacion:\n- Este producto cuesta: $'+array[i].precio+'\n- Disponemos de '+array[i].stock+' unidades');
+    return i;
+};
+
+//funcion para comprar el producto
+function comprar(i,arrayElegido,colorFlor){
+    let deseaComprar;
+    deseaComprar = prompt('Desea adquirir flores '+colorFlor+'? SI/NO');
+    if ((deseaComprar.toLowerCase())==='si'){
+        let cantidadAComprar=0;
+        let gastoTotal=0;
+        let factura=0;
+        //pregunto la cantidad a comprar
+        cantidadAComprar = prompt('Cuantas flores '+colorFlor+' desea comprar?\nCuestan $'+arrayElegido[i].precio+' cada una')
+        //compruebo si hay suficiente stock para el pedido
+        if(arrayElegido[i].stock>=cantidadAComprar){
+            //sumo el total de plantas por el precio de la misma
+            gastoTotal = gastoTotal+cantidadAComprar*arrayElegido[i].precio
+            //le resto al stock original la cantidad comprada
+            arrayElegido[i].stock-=cantidadAComprar;
+            alert('¡Compra exitosa!')
+            return factura = new Producto(colorFlor,gastoTotal,cantidadAComprar);
+        }else{alert('No disponemos de suficiente stock de flores '+colorFlor)}
+    }else{
+        alert('Esperamos volverte a ver.');
+        return factura = new Producto(colorFlor,0,0);}
 }
 
-//funcion para ir agregando a un arreglo los productos que se van comprando
-function facturaCompra (productoAdquirido,indice){
-    listaCompra[indice]=productoAdquirido;
-    indice = indice + 1;
-    console.log('estoy en factura compra'+indice)
-    return indice;
+function actualizarFactura(articuloComprado,alCarrito,indice){
+    alCarrito[indice]=articuloComprado;
 }
 
-//funcion que muestra la lista de los productos adquiridos
-function mostrarFactura(listaProductos,indice){
-    let factura ='Los articulos adquiridos son:\n';
-    console.log('estoy en omnstrar factura')
-    for (let i=0; i < indice;i++){
-        factura = factura + listaProductos[i]+'\n';
-    }
-    alert(factura);
+//funcion que recorre los elementos del arreglo,los muestra en consola
+//y otorga el importe total
+function mostrarFactura(alCarrito){
+    alCarrito.forEach((elemento)=>console.log(elemento))
+    let pagoTotal=0;
+    alCarrito.forEach((elemento)=>pagoTotal+=elemento.precio)
+    alert('Su compra llega a un total de $'+pagoTotal);
+    
 }
 
+//funcion que pregunta si desea seguir comprando y retorna booleano
+function volverComprar(){
+    let comprarMas=false;
+    comprarMas=prompt('Desea seguir comprando? SI/NO')
+    if (comprarMas.toLowerCase()==='si'){
+        return true;
+    }else{return false;}
+}

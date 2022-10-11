@@ -2,29 +2,57 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: black;
 }
 
 body{
-    background: linear-gradient(45deg,#e4a8ec,#ff9fef);
-    main{
-        min-height: 100vh;
-        background-image: url('../img/DEDEBeauty.png');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        display: flex;
+    header{
+        .logo{
+            display: flex;
         justify-content: center;
-        align-items:center;
-        h1{
-            background: linear-gradient(#e4a8ec,#d302b0);
-            border-radius: 15px;
-            padding: 20px;
-            transition: all .5s ease-in-out;
-            &:hover{
-                transform: scale(1.5);
-                letter-spacing: 45px;
-            }
+        img{
+            width: 25%;
+        }
+        }
+        nav{
+            background-color: #1bfa1baa;
         }
     }
-
+    .principal{
+        width: 100%;
+        display: flex;
+        .menuFiltros{
+            width: 25%;
+            background-color: #55ff55aa;
+            text-align: center;
+            .filtroColoresFlores{
+                display: flex;
+                flex-direction: column;
+                padding: 10px 5px;
+                .colorFlores{
+                    display: flex;
+                    justify-content: start;
+                    input{
+                        margin-right: 5px;
+                    }
+                }
+            }
+            .filtroTipoArbustos{
+                @extend .filtroColoresFlores;
+                .tipoArbusto{
+                    @extend .colorFlores;
+                }
+            }
+            .filtroTipoArboles{
+                @extend .filtroTipoArbustos;
+                .tipoArbol{
+                    @extend .tipoArbusto;
+                }
+            }
+        }
+        .catalogoVentas{
+            width: 80%;
+            min-height:100vh;
+        }
+    }
 }
