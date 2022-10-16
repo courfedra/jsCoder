@@ -29,59 +29,6 @@ let productoE = new Producto('naranja',1500,25);
 let productoF = new Producto('rosa',1000,25);
 
 
-//INICIO DE PROGRAMA
-alert('Bienvenidos a La Arboleria');
-let opcionElegida='';
-let indiceDeOpcionElegida=0;
-do{
-    //Arrays con productos completos
-    let listaProductosCompleta = [productoA,productoB,productoC,productoD,productoE,productoF];
-
-    //array para agregar los productos con stock
-    let listaNombresProductos = [];
-
-    //filtro los productos con stock
-    listaNombresProductos = listaProductosCompleta.filter((elemento)=>elemento.stock>0);
-
-    //array para agregar la lista de nombres productos con stock
-    let listaProductosConStock = [];
-
-    //Prepara una lista de solo los nombres de los productos que tienen stock
-    for(const producto of listaNombresProductos){
-        listaProductosConStock.push(producto.nombre);
-    }
-
-    //Menu para acceder a las opciones de compra
-    opcionElegida = menu(listaProductosConStock);
-
-    //Controlo si la opcion elegida esta incluida en la lista de flores a comprar
-    esValido = listaProductosConStock.some((elemento)=>elemento===opcionElegida);
-    
-    //Si es valido ejecuto la compra, sino pediremos si desea volver a comprar
-    if (esValido==true){
-        alert('Excelente, a mi teambien me gustan las  de color '+opcionElegida)
-        
-        //muestro caracteristicas del producto elegido y guardo el indice del producto
-        indiceDeOpcionElegida = mostrarCaracteristicas(opcionElegida,listaNombresProductos)
-        
-        //operacion de compra y actualizacion de stock
-        compraRealizada = comprar(indiceDeOpcionElegida,listaNombresProductos,opcionElegida)
-        cantidadDeCompras+=1;
-        actualizarFactura(compraRealizada,carrito,cantidadDeCompras);
-    }else{
-        alert('Elegiste flores de color: '+opcionElegida+' y lamentablemente no lo tenemos en este momento.')
-    }
-
-    //valido si desea seguir comprando
-    seguirComprando=volverComprar();
-
-}while (seguirComprando == true);
-
-//muestro toda la compra realizada por consola
-mostrarFactura(carrito);
-
-alert('Gracias por su visita')
-
 //INICIO DE FUNCIONES
 
 //funcion que muestra menu y retorna la opcion escrita
@@ -147,3 +94,77 @@ function volverComprar(){
         return true;
     }else{return false;}
 }
+
+
+
+
+//INICIO DE PROGRAMA
+
+
+
+
+alert('Bienvenidos a La Arboleria');
+
+let opcionElegida='';
+let indiceDeOpcionElegida=0;
+
+
+
+
+//INICIA CICLO DE COMPRA
+
+
+
+do{
+    //Arrays con productos completos
+    let listaProductosCompleta = [productoA,productoB,productoC,productoD,productoE,productoF];
+
+    //array para agregar los productos con stock
+    let listaProductosConStock = [];
+
+    //filtro los productos con stock
+    listaProductosConStock = listaProductosCompleta.filter((elemento)=>elemento.stock>0);
+
+    //array para agregar la lista de nombres productos con stock
+    let listaProductosNombre = [];
+
+    //Prepara una lista de solo los nombres de los productos que tienen stock
+    for(const producto of listaProductosConStock){
+        listaProductosNombre.push(producto.nombre);
+    }
+
+    //Menu para acceder a las opciones de compra
+    opcionElegida = menu(listaProductosNombre);
+
+    //Controlo si la opcion elegida esta incluida en la lista de flores a comprar
+    esValido = listaProductosNombre.some((elemento)=>elemento===opcionElegida);
+    
+    //Si es valido ejecuto la compra, sino pediremos si desea volver a comprar
+    if (esValido==true){
+        alert('Excelente, a mi teambien me gustan las  de color '+opcionElegida)
+        
+        //muestro caracteristicas del producto elegido y guardo el indice del producto
+        indiceDeOpcionElegida = mostrarCaracteristicas(opcionElegida,listaProductosConStock)
+        
+        //operacion de compra y actualizacion de stock
+        compraRealizada = comprar(indiceDeOpcionElegida,listaProductosConStock,opcionElegida)
+        cantidadDeCompras+=1;
+        actualizarFactura(compraRealizada,carrito,cantidadDeCompras);
+    }else{
+        alert('Elegiste flores de color: '+opcionElegida+' y lamentablemente no lo tenemos en este momento.')
+    }
+
+    //valido si desea seguir comprando
+    seguirComprando=volverComprar();
+
+
+}while (seguirComprando == true);
+
+//muestro toda la compra realizada por consola
+mostrarFactura(carrito);
+
+alert('Gracias por su visita')
+
+
+
+

@@ -7,12 +7,55 @@
 
 body{
     header{
+        width: 100%;
         .logo{
             display: flex;
-        justify-content: center;
-        img{
-            width: 25%;
+            justify-content: center;
+            img{
+                width: 25%;
+            }
         }
+        #login{
+            display: flex;
+            justify-content: center;
+            padding: 5px;
+            #textoLog{
+                padding: 5px;
+                border: none;
+                border-bottom: 2px solid black;
+            }
+            #botonLog{
+                margin: 0 5px;
+                padding: 5px 10px;
+                border: 1px solid #00aa00;
+                background-color: transparent;
+                color: #00aa00;
+                &:hover{
+                    background-color: #00ff0075;
+                }
+                &:active{
+                    color: black;
+                }
+            }
+        }
+        #carrito{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            h3{
+                color: #00aa00;
+            }
+            a{
+                text-decoration: none;
+                color: black;
+                font-size:20px;
+                margin: 0 5px;
+            }
+            #contador{
+                background-color: #1bfa1baa;
+                width: 20px;
+                height: 20px;
+            }
         }
         nav{
             background-color: #1bfa1baa;
@@ -21,38 +64,53 @@ body{
     .principal{
         width: 100%;
         display: flex;
-        .menuFiltros{
-            width: 25%;
-            background-color: #55ff55aa;
-            text-align: center;
-            .filtroColoresFlores{
+        outline: hidden;
+        #catalogoVentas{
+            width: 100%;
+            min-height:100vh;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            .articulo{
                 display: flex;
                 flex-direction: column;
-                padding: 10px 5px;
-                .colorFlores{
-                    display: flex;
-                    justify-content: start;
-                    input{
-                        margin-right: 5px;
+                width: 250px;
+                height: 350px;
+                margin: 10px;
+                align-items: center;
+                text-align: justify;
+                background-color: #00ff0075;   
+                box-shadow: 0px 0px 10px #00aa00ff;            
+                border-radius: 7.5px;
+                h2{
+                    text-align: center;
+                    font-size: 24px;
+                }
+                img{
+                    width:70%;
+                    height: 35%;
+                    border-radius: 10px;
+                    align-self: center;
+                }
+                ul{
+                    list-style: none;
+                    padding: 5px;
+                }
+                .btnCompra{
+                    background-color: transparent;
+                    width: 200px;
+                    border: 2px solid #00aa00;
+                    border-radius: 5px;
+                    letter-spacing: 2.5px;
+                    text-transform: uppercase;
+                    color: black;
+                    &:hover{
+                        background-color: #00aa00;
                     }
                 }
             }
-            .filtroTipoArbustos{
-                @extend .filtroColoresFlores;
-                .tipoArbusto{
-                    @extend .colorFlores;
-                }
-            }
-            .filtroTipoArboles{
-                @extend .filtroTipoArbustos;
-                .tipoArbol{
-                    @extend .tipoArbusto;
-                }
-            }
-        }
-        .catalogoVentas{
-            width: 80%;
-            min-height:100vh;
+            
         }
     }
 }
