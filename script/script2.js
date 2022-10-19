@@ -12,16 +12,16 @@ function Producto(id,nombre,precio,stock,categoria,img){
 }
 
 //Flores,Arbustos y Arboles
-let productoA = new Producto(1,'Flor Roja',120,5,"flor","../img/florRoja.jpg");
-let productoB = new Producto(2,'Flor Blanca',150,5,"flor","../img/florBlanca.jpg");
-let productoC = new Producto(3,'Flor Azul',100,5,"flor","../img/florAzul.jpg");
-let productoD = new Producto(4,'Flor Amarilla',200,5,"flor","../img/florAmarilla.jpg");
-let productoE = new Producto(5,'Flor Naranja',1500,5,"flor","../img/florNaranja.jpg");
-let productoF = new Producto(6,'Flor Rosa',1000,5,"flor","../img/florRosa.jpg");
-let productoG = new Producto(7,'Arbol Pequeño',2000,5,"arbol","../img/logoArbolOriginal.jpg");
-let productoH = new Producto(8,'Arbol Grande',4000,5,"arbol","../img/logoArbolOriginal.jpg");
-let productoI = new Producto(9,'Arbusto Pequeño',500,5,"arbusto","../img/logoArbolOriginal.jpg");
-let productoJ = new Producto(10,'Zrbusto Grande',475,1,"arbusto","../img/logoArbolOriginal.jpg");
+let productoA = new Producto(1,'Flor Roja',120,7,"flor","./img/florRoja.jpg");
+let productoB = new Producto(2,'Flor Blanca',150,9,"flor","./img/florBlanca.jpg");
+let productoC = new Producto(3,'Flor Azul',100,12,"flor","./img/florAzul.jpg");
+let productoD = new Producto(4,'Flor Amarilla',200,5,"flor","./img/florAmarilla.jpg");
+let productoE = new Producto(5,'Flor Naranja',1500,11,"flor","./img/florNaranja.jpg");
+let productoF = new Producto(6,'Flor Rosa',1000,5,"flor","./img/florRosa.jpg");
+let productoG = new Producto(7,'Arbol Pequeño',2000,21,"arbol","./img/logoArbolOriginal.jpg");
+let productoH = new Producto(8,'Arbol Grande',4000,4,"arbol","./img/logoArbolOriginal.jpg");
+let productoI = new Producto(9,'Arbusto Pequeño',500,100,"arbusto","./img/logoArbolOriginal.jpg");
+let productoJ = new Producto(10,'Zrbusto Grande',475,1,"arbusto","./img/logoArbolOriginal.jpg");
 
 //Arrays con productos completos
 let listaProductosCompleta = [productoA,productoB,productoC,productoD,productoE,productoF,productoG,productoH,productoI,productoJ];
@@ -84,14 +84,12 @@ function crearLayout(listaProductosLayout){
                 </ul>
                 <button id="agregar${producto.id}" class="btnCompra">Agregar<i class="fa-solid fa-cart-shopping"></i></button>`
             catalogo.append(articulo);
-            
             const botonAgregar = document.getElementById(`agregar${producto.id}`)
             botonAgregar.addEventListener('click',()=>{agregarCarrito(producto.id)})
         }
     }
 
-    //
-   
+
 // CREO EL PRIMER LAYOUT CON LOS PRODUCTOS COMPLETOS
 crearLayout(listaProductosConStock)
 
@@ -103,7 +101,7 @@ const btnVaciarCarrito = document.getElementById("botonVaciarCarrito")
 //INICIO DE SESION
 botonNombre.addEventListener('click',()=>{
     let textareaNombre = document.getElementById("textoLog")
-    nombreComprador = textareaNombre.value   
+    nombreComprador = textareaNombre.value
     let cardBienvenido = document.createElement("div");
     cardBienvenido.className = "bienvenidoNombre";
     cardBienvenido.innerHTML = `<h3>Bienvenido ${nombreComprador}</h3>`
@@ -122,7 +120,6 @@ buscador.addEventListener("input",()=>{
     if(buscador.value!==""){
         compararProductoBusqueda(buscador.value)
     }else{palabraFiltrada=""}
-    
 })
 
 // funcion de comparar la palabra ingresada con el nombre de los articulos
@@ -139,19 +136,14 @@ function compararProductoBusqueda(letraPalabra){
         }
         console.log(arrayProductosFiltrados.length)
     }
-    
-    
+
+
     console.log("Entre al if catalogo")
     //let popo=catalogo.remove(articulo)
     //catalogo = document.getElementById("catalogoVentasNuevo");
     crearLayout(arrayProductosFiltrados);
-    
+
 }
-
-//funcion para actualizar layout con la busqueda
-
-
-
 
 //BOTON VACIAR CARRITO
 btnVaciarCarrito.addEventListener("click",()=>{
@@ -185,8 +177,6 @@ const agregarCarrito = (prodId) => {
             actualizarCarrito()
     }
     }else{alert("No hay mas capo")}
-
-    
 }
 
 //Elimiar producto especifico del carrito
