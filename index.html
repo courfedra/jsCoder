@@ -17,47 +17,43 @@
       </div>
       <div id="login">
         <input type="text" id="textoLog" placeholder="Nombre">
-        <button id="botonLog">Log In</button>
+        <button id="botonLog">Loguearse</button>
       </div>
+      
+      
       <div id="carrito">
-        <h3>Mi Carrito</h3>
-        <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-        <div id="contador"></div>
-      </div>
-        <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-              <a class="navbar-brand logo" href="#"></a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Inicio</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Ver catálogo completo</a>
-                  </li>
-                  <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Nuestras plantas
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Arboles</a></li>
-                      <li><a class="dropdown-item" href="#">Arbustos</a></li>
-                      <li><a class="dropdown-item" href="#">Flores</a></li>
-                    </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled">Trabajá con nosotros</a>
-                  </li>
-                </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="..." aria-label="Search">
-                  <button class="btn btn-outline-success" type="submit">Buscar</button>
-                </form>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <h3>Mi Carrito <i class="fa-solid fa-cart-shopping"></i></h3>
+          <div><span id="contadorArticulos">0</span></div>
+        </button>
+  
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 id="nombreCarrito" class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="carritoArticulos">
+                <!--LISTA DE ARTICULOS AGREGADOS AL CARRITO-->
+              </div>
+              <div id="precioTotal">
+                <h4>Precio Total:</h4>
+                <p>0</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-vaciarCarrito" id="botonVaciarCarrito">Vaciar Carrito</button>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      </div>
+        <nav class="navegador">
+          <input type="text" id="buscador" placeholder="Buscar...">
         </nav>
     </header>
     <main class="principal">
