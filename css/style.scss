@@ -44,7 +44,7 @@ body{
                 background-color: #3b50039d;
                 padding: 5px;
                 border-radius: 5px;
-            }   
+            }
         }
         #carrito{
             display: flex;
@@ -118,19 +118,28 @@ body{
                         background-color: #00aa00;
                     }
                 }
-                
-            }    
+            }
         }
         .navegador{
             background-color: #1bfa1b33;
             display: flex;
-            justify-content: center;
+            text-align: center;
+            flex-direction: column;
             padding: 5px 0;
             #buscador{
                 border-color: #00aa00;
                 border-radius: 10px;
                 padding: 5px;
-                width: 50%;  
+                margin:10px 0;
+                width: 50%;
+                align-self: center;
+            }
+            .filtros{
+                display: flex;
+                justify-content: space-around;
+                .filtroColores{
+                    padding: 5px;
+                }
             }
         }
     }
@@ -140,14 +149,13 @@ body{
         outline: hidden;
         #catalogoVentas{
             width: 100%;
-            min-height:100vh;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-evenly;
             align-items: center;
             .hidden{
                 display: none;
-            } 
+            }
             .articulo{
                 display: flex;
                 flex-direction: column;
@@ -174,13 +182,29 @@ body{
                     padding: 5px;
                 }
                 .btnCompra{
-                    background-color: transparent;
                     width: 200px;
-                    border: 2px solid #00aa00;
                     border-radius: 5px;
                     letter-spacing: 2.5px;
                     text-transform: uppercase;
                     color: black;
+                }
+                .btnEliminar{
+                    background-color: #ff0000;
+                }
+                .sinStock{
+                    background-color: #ff0000;
+                    border: 2px solid #ff0000;
+                    &:hover{
+                        background-color: #ff000044;
+                    }
+                    &:active{
+                        background-color: #6d00009a;
+                        border: 2px solid #6d0000;
+                    }
+                }
+                .conStock{
+                    background-color: #00aa00;
+                    border: 2px solid #00aa00;
                     &:hover{
                         background-color: #00aa00;
                     }
@@ -189,11 +213,12 @@ body{
                         border: 2px solid #3c3d01;
                     }
                 }
-                .btnEliminar{
-                    background-color: red;
-                }
             }
-            
         }
+    }
+    footer{
+        background-color: #333;
+        min-height: 15vh;
+
     }
 }

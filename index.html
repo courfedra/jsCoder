@@ -19,15 +19,12 @@
         <input type="text" id="textoLog" placeholder="Nombre">
         <button id="botonLog">Loguearse</button>
       </div>
-      
-      
       <div id="carrito">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
           <h3>Mi Carrito <i class="fa-solid fa-cart-shopping"></i></h3>
           <div><span id="contadorArticulos">0</span></div>
         </button>
-  
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -54,12 +51,39 @@
       </div>
         <nav class="navegador">
           <input type="text" id="buscador" placeholder="Buscar...">
+          <div class="filtros">
+            <div class=" filtroColores colorRojo">
+              <input type="checkbox" id="colorRojo">
+              <label for="colorRojo">CheckBox Rojo</label>
+            </div>
+            <div class=" filtroColores colorBlanco">
+              <input type="checkbox" id="colorBlanco">
+              <label for="colorBlanco">CheckBox Blanco</label>
+            </div>
+            <div class=" filtroColores colorAzul">
+              <input type="checkbox" id="colorAzul">
+              <label for="colorAzul">CheckBox Azul</label>
+            </div>
+            <div class=" filtroColores colorAmarillo">
+              <input type="checkbox" id="colorAmarillo">
+              <label for="colorAmarillo">CheckBox Amarillo</label>
+            </div>
+            <div class=" filtroColores colorNaranja">
+              <input type="checkbox" id="colorNaranja">
+              <label for="colorNaranja">CheckBox Naranja</label>
+            </div>
+            <div class=" filtroColores colorRosa">
+              <input type="checkbox" id="colorRosa">
+              <label for="colorRosa">CheckBox Rosa</label>
+            </div>
+          </div>
         </nav>
     </header>
     <main class="principal">
       <section id="catalogoVentas">
       </section>
     </main>
+    
     <!--Font Awesome Icons-->
     <script src="https://kit.fontawesome.com/a7eb31baec.js" crossorigin="anonymous"></script>
     <!-- JavaScript Bundle with Popper -->

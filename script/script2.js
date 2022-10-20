@@ -83,6 +83,13 @@ function crearLayout(listaProductosLayout){
             catalogo.append(articulo);
             const botonAgregar = document.getElementById(`agregar${producto.id}`)
             botonAgregar.addEventListener('click',()=>{agregarCarrito(producto.id)})
+            if(producto.stock===0){
+                botonAgregar.classList.add("sinStock")
+                botonAgregar.classList.remove("conStock")
+            }else{
+                botonAgregar.classList.add("conStock")
+                botonAgregar.classList.remove("sinStock")
+            }
         }
     }
 
@@ -121,7 +128,7 @@ buscador.addEventListener("input",()=>{
     }
 })
 
-//COMMIT ARREGLADO BUSCADOR------
+
 
 // funcion de comparar la palabra ingresada con el nombre de los articulos
 //Borra productos fuera del buscador
@@ -150,6 +157,7 @@ btnVaciarCarrito.addEventListener("click",()=>{
     }
     carrito.length=0;
     actualizarCarrito();
+    crearLayout(listaProductosConStock)
 })
 
 //AGREGAR AL CARRITO CON CADA CLICK
@@ -172,7 +180,8 @@ const agregarCarrito = (prodId) => {
             item.stock-=1
             actualizarCarrito()
     }
-    }else{alert("No hay mas capo")}
+    }
+    crearLayout(listaProductosConStock)
 }
 
 //Elimiar producto especifico del carrito
@@ -186,6 +195,7 @@ const eliminarCarrito = (prodId)=>{
     //Actualizo a valor inicial la cantidad de elementos para sumar al carrito
     item.sumCarrito=1
     actualizarCarrito();
+    crearLayout(listaProductosConStock)
 }
 
 //REGISTRA CUALQUEIR CAMBIO EN EL CARRITO, ELIMINACION O AGREGADO

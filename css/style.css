@@ -125,14 +125,24 @@ body header #carrito #carritoArticulos .articuloEnCarrito:before {
 body header .navegador {
   background-color: rgba(27, 250, 27, 0.2);
   display: flex;
-  justify-content: center;
+  text-align: center;
+  flex-direction: column;
   padding: 5px 0;
 }
 body header .navegador #buscador {
   border-color: #00aa00;
   border-radius: 10px;
   padding: 5px;
+  margin: 10px 0;
   width: 50%;
+  align-self: center;
+}
+body header .navegador .filtros {
+  display: flex;
+  justify-content: space-around;
+}
+body header .navegador .filtros .filtroColores {
+  padding: 5px;
 }
 body .principal {
   width: 100%;
@@ -141,7 +151,6 @@ body .principal {
 }
 body .principal #catalogoVentas {
   width: 100%;
-  min-height: 100vh;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
@@ -177,21 +186,38 @@ body .principal #catalogoVentas .articulo ul {
   padding: 5px;
 }
 body .principal #catalogoVentas .articulo .btnCompra {
-  background-color: transparent;
   width: 200px;
-  border: 2px solid #00aa00;
   border-radius: 5px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
   color: black;
 }
-body .principal #catalogoVentas .articulo .btnCompra:hover {
+body .principal #catalogoVentas .articulo .btnEliminar {
+  background-color: #ff0000;
+}
+body .principal #catalogoVentas .articulo .sinStock {
+  background-color: #ff0000;
+  border: 2px solid #ff0000;
+}
+body .principal #catalogoVentas .articulo .sinStock:hover {
+  background-color: rgba(255, 0, 0, 0.2666666667);
+}
+body .principal #catalogoVentas .articulo .sinStock:active {
+  background-color: rgba(109, 0, 0, 0.6039215686);
+  border: 2px solid #6d0000;
+}
+body .principal #catalogoVentas .articulo .conStock {
+  background-color: #00aa00;
+  border: 2px solid #00aa00;
+}
+body .principal #catalogoVentas .articulo .conStock:hover {
   background-color: #00aa00;
 }
-body .principal #catalogoVentas .articulo .btnCompra:active {
+body .principal #catalogoVentas .articulo .conStock:active {
   background-color: #3c3d01;
   border: 2px solid #3c3d01;
 }
-body .principal #catalogoVentas .articulo .btnEliminar {
-  background-color: red;
+body footer {
+  background-color: #333;
+  min-height: 15vh;
 }/*# sourceMappingURL=style.css.map */
