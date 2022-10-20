@@ -69,12 +69,9 @@ let catalogo = document.getElementById("catalogoVentas");
 
 function crearLayout(listaProductosLayout){
     catalogo.innerHTML =""
-    console.log("entre con "+listaProductosLayout)
         for(const producto of listaProductosLayout){
-            console.log("entre al for con "+listaProductosLayout)
             articulo = document.createElement("div");
             articulo.className = "articulo";
-            console.log("Las propiedades son "+articulo.classList)
             articulo.innerHTML=`
                 <h2>${producto.nombre}</h2>
                 <img src="${producto.img}"></img>
@@ -116,33 +113,32 @@ botonNombre.addEventListener('click',()=>{
 let buscador
 buscador=document.getElementById("buscador")
 buscador.addEventListener("input",()=>{
-    console.log(buscador.value)
     if(buscador.value!==""){
         compararProductoBusqueda(buscador.value)
-    }else{palabraFiltrada=""}
+    }else{
+        palabraFiltrada=0;
+        compararProductoBusqueda(palabraFiltrada)
+    }
 })
 
+//COMMIT ARREGLADO BUSCADOR------
+
 // funcion de comparar la palabra ingresada con el nombre de los articulos
-//Borrar productos fuera del buscador
+//Borra productos fuera del buscador
 function compararProductoBusqueda(letraPalabra){
-    let cantidadCaracteres=letraPalabra.toLowerCase().length;
-    arrayProductosFiltrados=[]
-    for(prod of listaProductosConStock){
-        let palabraElegida=(prod.nombre.toLowerCase()).split("",cantidadCaracteres)
-        let palabraElegidaArmada = palabraElegida.join("")
-        if (letraPalabra===palabraElegidaArmada){
-            console.log(prod.nombre)
-            arrayProductosFiltrados.push(prod)
+    if(letraPalabra!==0){
+        arrayProductosFiltrados=[]
+        for(prod of listaProductosConStock){
+                letraPalabra=letraPalabra.toLowerCase()
+                let nombreProducto=prod.nombre.toLowerCase()
+            if(nombreProducto.includes(letraPalabra)){
+                arrayProductosFiltrados.push(prod)
+            }
         }
-        console.log(arrayProductosFiltrados.length)
+        crearLayout(arrayProductosFiltrados);
+    }else{
+        crearLayout(listaProductosConStock)
     }
-
-
-    console.log("Entre al if catalogo")
-    //let popo=catalogo.remove(articulo)
-    //catalogo = document.getElementById("catalogoVentasNuevo");
-    crearLayout(arrayProductosFiltrados);
-
 }
 
 //BOTON VACIAR CARRITO
