@@ -108,6 +108,8 @@ botonNombre.addEventListener('click',()=>{
 })
 
 //BARRA DE BUSQUEDA
+
+/*ver como implementar funcion para qeu cuando utiliza el buscador y agrega al carrito, este no vuelva a 0*/
 let buscador
 buscador=document.getElementById("buscador")
 buscador.addEventListener("input",()=>{
