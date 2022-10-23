@@ -199,7 +199,6 @@ const agregarCarrito = (prodId) => {
     guardarStorageLayout()
     guardarStorageCarrito()
     crearLayout(listaProductosConStock)
-    
 }
 
 //Elimiar producto especifico del carrito
@@ -208,6 +207,8 @@ const eliminarCarrito = (prodId)=>{
     //busco indice donde esta el item a retirar
     const indice = carrito.indexOf(item)
     carrito.splice(indice,1);
+    //vuelvo a el valor original del stock
+    listaProductosConStock[indice].stock=listaProductosConStock[indice].stockTope;
     //actualizo a stock original
     item.stock=item.stockTope;
     //Actualizo a valor inicial la cantidad de elementos para sumar al carrito
