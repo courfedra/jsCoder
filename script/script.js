@@ -1,170 +1,24 @@
-//variable para saber si desea seguir comprando
-let seguirComprando = false;
-
-//variable para saber si su busqueda esta dentro de las opciones ofrecidas
-let esValido = false;
-
-/*variable para llevar cuenta de la cantidad de veces que ha comprado, no de articulos invididuales*/
-let cantidadDeCompras=0;
-
-//array para guardar los detalles de la compra realizada --individual
-let compraRealizada = [];
-
-//array para guardar los detalles de toda la compra realizada --total
-let carrito=[];
 
 //Objetos - nombre, precio y stock
-function Producto(nombre,precio,stock){
+function Producto(id,nombre,precio,stock,categoria,img){
+    this.id = id;
+    this.sumCarrito = 1;
     this.nombre = nombre;
     this.precio = precio;
     this.stock = stock||0;
+    this.stockTope = stock||0;
+    this.categoria = categoria;
+    this.img = img;
 }
 
 //Flores,Arbustos y Arboles
-let productoA = new Producto('roja',120,70);
-let productoB = new Producto('blanca',150,30);
-let productoC = new Producto('azul',100,50);
-let productoD = new Producto('amarilla',200,0);
-let productoE = new Producto('naranja',1500,25);
-let productoF = new Producto('rosa',1000,25);
-
-
-//INICIO DE FUNCIONES
-
-//funcion que muestra menu y retorna la opcion escrita
-function menu(opciones){
-    let eleccion = prompt('¿Que color de flor desea comprar?\n\n- '+opciones.join('\n- '));
-    return eleccion;
-};
-
-//Funcion para mostrar caracteristicas del producto elegido
-function mostrarCaracteristicas(opcion,array){
-    for(i=0;i < (array.length);i++){
-        if (array[i].nombre==opcion){
-            break;
-        }
-    };
-    alert('Las flores de color '+array[i].nombre+' tiene la siguiente informacion:\n- Este producto cuesta: $'+array[i].precio+'\n- Disponemos de '+array[i].stock+' unidades');
-    return i;
-};
-
-//funcion para comprar el producto
-function comprar(i,arrayElegido,colorFlor){
-    let deseaComprar;
-    deseaComprar = prompt('Desea adquirir flores '+colorFlor+'? SI/NO');
-    if ((deseaComprar.toLowerCase())==='si'){
-        let cantidadAComprar=0;
-        let gastoTotal=0;
-        let factura=0;
-        //pregunto la cantidad a comprar
-        cantidadAComprar = prompt('Cuantas flores '+colorFlor+' desea comprar?\nCuestan $'+arrayElegido[i].precio+' cada una')
-        //compruebo si hay suficiente stock para el pedido
-        if(arrayElegido[i].stock>=cantidadAComprar){
-            //sumo el total de plantas por el precio de la misma
-            gastoTotal = gastoTotal+cantidadAComprar*arrayElegido[i].precio
-            //le resto al stock original la cantidad comprada
-            arrayElegido[i].stock-=cantidadAComprar;
-            alert('¡Compra exitosa!')
-            return factura = new Producto(colorFlor,gastoTotal,cantidadAComprar);
-        }else{alert('No disponemos de suficiente stock de flores '+colorFlor)}
-    }else{
-        alert('Esperamos volverte a ver.');
-        return factura = new Producto(colorFlor,0,0);}
-}
-
-function actualizarFactura(articuloComprado,alCarrito,indice){
-    alCarrito[indice]=articuloComprado;
-}
-
-//funcion que recorre los elementos del arreglo,los muestra en consola
-//y otorga el importe total
-function mostrarFactura(alCarrito){
-    alCarrito.forEach((elemento)=>console.log(elemento))
-    let pagoTotal=0;
-    alCarrito.forEach((elemento)=>pagoTotal+=elemento.precio)
-    alert('Su compra llega a un total de $'+pagoTotal);
-    
-}
-
-//funcion que pregunta si desea seguir comprando y retorna booleano
-function volverComprar(){
-    let comprarMas=false;
-    comprarMas=prompt('Desea seguir comprando? SI/NO')
-    if (comprarMas.toLowerCase()==='si'){
-        return true;
-    }else{return false;}
-}
-
-
-
-
-//INICIO DE PROGRAMA
-
-
-
-
-alert('Bienvenidos a La Arboleria');
-
-let opcionElegida='';
-let indiceDeOpcionElegida=0;
-
-
-
-
-//INICIA CICLO DE COMPRA
-
-
-
-do{
-    //Arrays con productos completos
-    let listaProductosCompleta = [productoA,productoB,productoC,productoD,productoE,productoF];
-
-    //array para agregar los productos con stock
-    let listaProductosConStock = [];
-
-    //filtro los productos con stock
-    listaProductosConStock = listaProductosCompleta.filter((elemento)=>elemento.stock>0);
-
-    //array para agregar la lista de nombres productos con stock
-    let listaProductosNombre = [];
-
-    //Prepara una lista de solo los nombres de los productos que tienen stock
-    for(const producto of listaProductosConStock){
-        listaProductosNombre.push(producto.nombre);
-    }
-
-    //Menu para acceder a las opciones de compra
-    opcionElegida = menu(listaProductosNombre);
-
-    //Controlo si la opcion elegida esta incluida en la lista de flores a comprar
-    esValido = listaProductosNombre.some((elemento)=>elemento===opcionElegida);
-    
-    //Si es valido ejecuto la compra, sino pediremos si desea volver a comprar
-    if (esValido==true){
-        alert('Excelente, a mi teambien me gustan las  de color '+opcionElegida)
-        
-        //muestro caracteristicas del producto elegido y guardo el indice del producto
-        indiceDeOpcionElegida = mostrarCaracteristicas(opcionElegida,listaProductosConStock)
-        
-        //operacion de compra y actualizacion de stock
-        compraRealizada = comprar(indiceDeOpcionElegida,listaProductosConStock,opcionElegida)
-        cantidadDeCompras+=1;
-        actualizarFactura(compraRealizada,carrito,cantidadDeCompras);
-    }else{
-        alert('Elegiste flores de color: '+opcionElegida+' y lamentablemente no lo tenemos en este momento.')
-    }
-
-    //valido si desea seguir comprando
-    seguirComprando=volverComprar();
-
-
-}while (seguirComprando == true);
-
-//muestro toda la compra realizada por consola
-mostrarFactura(carrito);
-
-alert('Gracias por su visita')
-
-
-
-
+let productoA = new Producto(1,'Flor Roja',120,7,"flor","./img/florRoja.jpg");
+let productoB = new Producto(2,'Flor Blanca',150,9,"flor","./img/florBlanca.jpg");
+let productoC = new Producto(3,'Flor Azul',100,12,"flor","./img/florAzul.jpg");
+let productoD = new Producto(4,'Flor Amarilla',200,5,"flor","./img/florAmarilla.jpg");
+let productoE = new Producto(5,'Flor Naranja',1500,11,"flor","./img/florNaranja.jpg");
+let productoF = new Producto(6,'Flor Rosa',1000,5,"flor","./img/florRosa.jpg");
+let productoG = new Producto(7,'Arbol Pequeño',2000,21,"arbol","./img/logoArbolOriginal.jpg");
+let productoH = new Producto(8,'Arbol Grande',4000,4,"arbol","./img/logoArbolOriginal.jpg");
+let productoI = new Producto(9,'Arbusto Pequeño',500,10,"arbusto","./img/logoArbolOriginal.jpg");
+let productoJ = new Producto(10,'Zrbusto Grande',475,1,"arbusto","./img/logoArbolOriginal.jpg");

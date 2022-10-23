@@ -1,106 +1,97 @@
-
-//Objetos - nombre, precio y stock
-function Producto(id,nombre,precio,stock,categoria,img){
-    this.id = id;
-    this.sumCarrito = 1;
-    this.nombre = nombre;
-    this.precio = precio;
-    this.stock = stock||0;
-    this.stockTope = stock||0;
-    this.categoria = categoria;
-    this.img = img;
-}
-
-//Flores,Arbustos y Arboles
-let productoA = new Producto(1,'Flor Roja',120,7,"flor","./img/florRoja.jpg");
-let productoB = new Producto(2,'Flor Blanca',150,9,"flor","./img/florBlanca.jpg");
-let productoC = new Producto(3,'Flor Azul',100,12,"flor","./img/florAzul.jpg");
-let productoD = new Producto(4,'Flor Amarilla',200,5,"flor","./img/florAmarilla.jpg");
-let productoE = new Producto(5,'Flor Naranja',1500,11,"flor","./img/florNaranja.jpg");
-let productoF = new Producto(6,'Flor Rosa',1000,5,"flor","./img/florRosa.jpg");
-let productoG = new Producto(7,'Arbol Pequeño',2000,21,"arbol","./img/logoArbolOriginal.jpg");
-let productoH = new Producto(8,'Arbol Grande',4000,4,"arbol","./img/logoArbolOriginal.jpg");
-let productoI = new Producto(9,'Arbusto Pequeño',500,100,"arbusto","./img/logoArbolOriginal.jpg");
-let productoJ = new Producto(10,'Zrbusto Grande',475,1,"arbusto","./img/logoArbolOriginal.jpg");
-
-//Arrays con productos completos
-let listaProductosCompleta = [productoA,productoB,productoC,productoD,productoE,productoF,productoG,productoH,productoI,productoJ];
-
 //array para agregar los productos con stock
-let listaProductosConStock = [];
-
+let listaProductosCompleta=[];
 //filtro los productos con stock
-listaProductosConStock = listaProductosCompleta.filter((elemento)=>elemento.stock>0);
-
+let listaProductosConStock = [];
 //lista de productos filtrados
-let arrayProductosFiltrados=[]
-
+let arrayProductosFiltrados=[];
 //array para agregar la lista de nombres productos con stock
 let listaProductosNombre = [];
-
-//Prepara una lista de solo los nombres de los productos que tienen stock
-for(const producto of listaProductosConStock){
-    listaProductosNombre.push(producto.nombre);
-}
-
-
-
-
+//variable a usar para la barra de busqueda
+let palabraFiltrada=""
 //Array para ir agregarndo los productos seleccionados al carrito
 let carrito=[]
 
+//Variable para guardar el nombre del usuario al iniciar sesion
+let nombreComprador;
+
+
+//para limpiar storage al comprobar guardados y cargados
+//localStorage.clear()
+
+
 //variable donde almacenaremos los productos agregados al carrito
 let contenedorCarrito = document.getElementById("carritoArticulos")
-
-
-
-//CARGAR PRODUCTOS EN LA WEB y actualizar layout al ser necesario
-let palabraFiltrada=""
+//variable contenedora de las card de los productos con stock
 let catalogo = document.getElementById("catalogoVentas");
+//variable donde le asigno el nombre del usuario al carrito
+let nombreCarrito = document.getElementById("nombreCarrito")
+//boton que permite guardar el nombre ingresado por el usuario
+const botonNombre = document.getElementById("botonLog");
+//boton para vaciar el carrito completo
+const btnVaciarCarrito = document.getElementById("botonVaciarCarrito")
 
-//BUSCAR LA FORMA DE BORRAR EL CREATE ELEMENT
-//REPLACECHILD O REMOVECHILD
+//funcion para crear los objetos en caso de no tener registros previos de ellos
+function crearObjetos(){
+    listaProductosCompleta = [productoA,productoB,productoC,productoD,productoE,productoF,productoG,productoH,productoI,productoJ];
+    listaProductosConStock = listaProductosCompleta.filter((elemento)=>elemento.stock>0);
+
+    //Prepara una lista de solo los nombres de los productos que tienen stock
+    for(const producto of listaProductosConStock){
+        listaProductosNombre.push(producto.nombre);
+    }
+}
 
 
-
-
-//
-
-
+//funcion para crear y actualizar el layout con las interacciones del usuario
 function crearLayout(listaProductosLayout){
     catalogo.innerHTML =""
-        for(const producto of listaProductosLayout){
-            articulo = document.createElement("div");
-            articulo.className = "articulo";
-            articulo.innerHTML=`
-                <h2>${producto.nombre}</h2>
-                <img src="${producto.img}"></img>
-                <ul>
-                    <li><p>Stock: <b>${producto.stock}</b> unidades.</p></li>
-                    <li><p>Precio: $<b>${producto.precio}</b></p></li>
-                </ul>
-                <button id="agregar${producto.id}" class="btnCompra">Agregar<i class="fa-solid fa-cart-shopping"></i></button>`
-            catalogo.append(articulo);
-            const botonAgregar = document.getElementById(`agregar${producto.id}`)
-            botonAgregar.addEventListener('click',()=>{agregarCarrito(producto.id)})
-            if(producto.stock===0){
-                botonAgregar.classList.add("sinStock")
-                botonAgregar.classList.remove("conStock")
-            }else{
-                botonAgregar.classList.add("conStock")
-                botonAgregar.classList.remove("sinStock")
-            }
+    
+    for(const producto of listaProductosLayout){
+        articulo = document.createElement("div");
+        articulo.className = "articulo";
+        articulo.innerHTML=`
+            <h2>${producto.nombre}</h2>
+            <img src="${producto.img}"></img>
+            <ul>
+                <li><p>Stock: <b>${producto.stock}</b> unidades.</p></li>
+                <li><p>Precio: $<b>${producto.precio}</b></p></li>
+            </ul>
+            <button id="agregar${producto.id}" class="btnCompra">Agregar<i class="fa-solid fa-cart-shopping"></i></button>`
+        catalogo.append(articulo);
+        const botonAgregar = document.getElementById(`agregar${producto.id}`)
+        botonAgregar.addEventListener('click',()=>{agregarCarrito(producto.id)})
+        if(producto.stock===0){
+            botonAgregar.classList.add("sinStock")
+            botonAgregar.classList.remove("conStock")
+        }else{
+            botonAgregar.classList.add("conStock")
+            botonAgregar.classList.remove("sinStock")
         }
     }
+}
 
 
-// CREO EL PRIMER LAYOUT CON LOS PRODUCTOS COMPLETOS
-crearLayout(listaProductosConStock)
+//comprobamos el estado y procedemos
+function comprobarStorage(){
+    //asignamos a valor Jason el contenido, si es que tiene, para proceder a llenarlo o recuperar informacion
+    let valorJson=JSON.parse(localStorage.getItem('listaProductosConStock'))
+    if (valorJson==null){
+        crearObjetos()
+        localStorage.setItem("carrito",JSON.stringify(carrito))
+        localStorage.setItem("listaProductosConStock",JSON.stringify(listaProductosConStock))
+        listaProductosConStock=JSON.parse(localStorage.getItem('listaProductosConStock'))
+    }else{
+        listaProductosConStock=JSON.parse(localStorage.getItem('listaProductosConStock'));
+        carrito=JSON.parse(localStorage.getItem('carrito'))
 
-let nombreComprador;
-let nombreCarrito = document.getElementById("nombreCarrito")
-const botonNombre = document.getElementById("botonLog");
-const btnVaciarCarrito = document.getElementById("botonVaciarCarrito")
+    }
+}
+
+//funcion que guarda los cambios realizados en el storage
+function guardarStorageLayout(){
+    localStorage.setItem("listaProductosConStock",JSON.stringify(listaProductosConStock))
+}
+
 
 //INICIO DE SESION
 botonNombre.addEventListener('click',()=>{
@@ -120,6 +111,7 @@ botonNombre.addEventListener('click',()=>{
 let buscador
 buscador=document.getElementById("buscador")
 buscador.addEventListener("input",()=>{
+
     if(buscador.value!==""){
         compararProductoBusqueda(buscador.value)
     }else{
@@ -148,28 +140,49 @@ function compararProductoBusqueda(letraPalabra){
     }
 }
 
+//funcion que guarda los cambios relizados en el carrito
+function guardarStorageCarrito(){
+    localStorage.setItem("carrito",JSON.stringify(carrito))
+}
+
+//funcion que carga la informacion guardada al carrito
+function cargarCarritoStorage(){
+    carrito=JSON.parse(localStorage.getItem('carrito'))
+}
+
+
 //BOTON VACIAR CARRITO
 btnVaciarCarrito.addEventListener("click",()=>{
     //actualizo todos los stock y valores iniciales
     for(const prod of carrito){
+        console.log("CARRITO: nombre "+prod.nombre+" y stock "+prod.stock)
         prod.stock=prod.stockTope
-        prod.sumCarrito=1
+        prod.sumCarrito=1;
+        console.log("CARRITO: nombre "+prod.nombre+" y stock "+prod.stock)
     }
+    //RENUEVO STOCK DE LISTA CON STOCK
+    //ERROR QUE SURGIA AL RECARGAR LA PAG Y LUEGO VACIAR CARRITO
+    for(const prod of listaProductosConStock){
+        prod.stock=prod.stockTope
+        prod.sumCarrito=1;
+    }
+
     carrito.length=0;
-    actualizarCarrito();
+    actualizarCarrito()
     crearLayout(listaProductosConStock)
+    guardarStorageLayout()
+    guardarStorageCarrito()
 })
 
 //AGREGAR AL CARRITO CON CADA CLICK
 const agregarCarrito = (prodId) => {
 
     //controlar cantidad de stock para permitir compra
-
     const item = listaProductosConStock.find((prod)=>prod.id===prodId)
     //variable para saber que hacer si esta repetido
     let itemRepetido = carrito.some((prod)=>prod.id===item.id)
     //controlo que la compra no supere la cantidad de stock
-    if((item.stock >0) ){
+    if(item.stock >0){
         //si esta repetido, aumento el contador de sumCarrito
         if (itemRepetido==true){
             item.sumCarrito+=1
@@ -179,9 +192,12 @@ const agregarCarrito = (prodId) => {
             carrito.push(item)
             item.stock-=1
             actualizarCarrito()
+        }
     }
-    }
+    guardarStorageLayout()
+    guardarStorageCarrito()
     crearLayout(listaProductosConStock)
+    
 }
 
 //Elimiar producto especifico del carrito
@@ -194,11 +210,14 @@ const eliminarCarrito = (prodId)=>{
     item.stock=item.stockTope;
     //Actualizo a valor inicial la cantidad de elementos para sumar al carrito
     item.sumCarrito=1
+    guardarStorageLayout()
+    guardarStorageCarrito()
     actualizarCarrito();
     crearLayout(listaProductosConStock)
 }
 
-//REGISTRA CUALQUEIR CAMBIO EN EL CARRITO, ELIMINACION O AGREGADO
+
+//REGISTRA CUALQUIER CAMBIO EN EL CARRITO, ELIMINACION O AGREGADO
 const actualizarCarrito = () =>{
     contenedorCarrito.innerHTML="";
     carrito.forEach((prod)=>{
@@ -212,6 +231,7 @@ const actualizarCarrito = () =>{
             <button onclick="eliminarCarrito(${prod.id})" class="btnEliminarProducto"><i class="fas fa-trash-alt"</button>
         `
         contenedorCarrito.append(div)
+        
     })
     //CANTIDAD DE PRODUCTOS EN CARRITO
     let contadorArticulos = document.getElementById("contadorArticulos")
@@ -221,7 +241,6 @@ const actualizarCarrito = () =>{
         }
     )
     contadorArticulos.innerText=contadorTotal;
-
     //PRECIO TOTAL DE PRODUCTOS EN CARRITO
     let precioTotal = document.getElementById("precioTotal")
     let sumPrecios=0
@@ -230,5 +249,12 @@ const actualizarCarrito = () =>{
         }
     )
     precioTotal.innerText=`El precio total es de: $${sumPrecios}`;
+    
 }
 
+//CARGO TODA LA PAGINA POR PRIMERA VEZ, COMPROBANDO STORAGE Y CARGANDO LA INFORMACION
+
+comprobarStorage()
+cargarCarritoStorage()
+actualizarCarrito()
+crearLayout(listaProductosConStock)
