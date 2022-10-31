@@ -4,92 +4,81 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="shorcut icon" href="img/logoArbolOriginal.jpg">
     <title>Arbolería</title>
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <!--My CSS-->
-    <link rel="stylesheet" href="css/style.css">
+    <!--<link rel="stylesheet" href="css/style.css">-->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
-      <div class="logo">
-        <img src="img/logoArbolOriginal.jpg" alt="Logo">
-      </div>
-      <div id="login">
-        <input type="text" id="textoLog" placeholder="Nombre">
-        <button id="botonLog">Loguearse</button>
-      </div>
-      <div id="carrito">
-        <!-- Button trigger modal -->
-        <button type="button" class="btn btn-modal" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          <h3>Mi Carrito <i class="fa-solid fa-cart-shopping"></i></h3>
-          <div><span id="contadorArticulos">0</span></div>
-        </button>
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 id="nombreCarrito" class="modal-title fs-5" id="exampleModalLabel"></h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body" id="carritoArticulos">
-                <!--LISTA DE ARTICULOS AGREGADOS AL CARRITO-->
-              </div>
-              <div id="precioTotal">
-                <h4>Precio Total:</h4>
-                <p>0</p>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-cerrar" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-vaciarCarrito" id="botonVaciarCarrito">Vaciar Carrito</button>
-              </div>
-            </div>
-          </div>
+        <div class="logo">
+            <img src="img/logoArbolOriginal.jpg" alt="Logo">
         </div>
-      </div>
-      </div>
-        <nav class="navegador">
-          <input type="text" id="buscador" placeholder="Buscar...">
-          <div class="filtros">
-            <div class=" filtroColores colorRojo">
-              <input type="checkbox" id="colorRojo">
-              <label for="colorRojo">CheckBox Rojo</label>
+        <!--<a target="_blank" href="otroCarrito.html" >Otro Carrito</a>-->
+        <div class="layoutLogin">
+            <div id="login">
+
             </div>
-            <div class=" filtroColores colorBlanco">
-              <input type="checkbox" id="colorBlanco">
-              <label for="colorBlanco">CheckBox Blanco</label>
+            
+            <div class="botonUsuario">
+                <button id="botonLog"><i class="fa-solid fa-right-to-bracket"> Sign In</i></button>
+                <button id="botonRegistro"><i class="fa-solid fa-user-plus"> Sign Up</i></button>
             </div>
-            <div class=" filtroColores colorAzul">
-              <input type="checkbox" id="colorAzul">
-              <label for="colorAzul">CheckBox Azul</label>
-            </div>
-            <div class=" filtroColores colorAmarillo">
-              <input type="checkbox" id="colorAmarillo">
-              <label for="colorAmarillo">CheckBox Amarillo</label>
-            </div>
-            <div class=" filtroColores colorNaranja">
-              <input type="checkbox" id="colorNaranja">
-              <label for="colorNaranja">CheckBox Naranja</label>
-            </div>
-            <div class=" filtroColores colorRosa">
-              <input type="checkbox" id="colorRosa">
-              <label for="colorRosa">CheckBox Rosa</label>
-            </div>
-          </div>
-        </nav>
+        </div>
     </header>
+    <nav class="navbar" >
+        <div id="carrito" class="container-fluid">
+            <h2>El Arbolito</h2>
+            <div id="usuarioLogueado">
+                
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span id="contadorArticulos">0</span>
+                <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                
+                <div class="offcanvas-header">
+                    <h2 id="nombreCarrito"></h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+            <!--RELLENO DE CARRITO-->
+                <div id="carritoArticulos" class="offcanvas-body">
+                
+                </div>
+            <!--FIN RELLENO DE CARRITO-->
+                <div id="precioTotal">
+                    <h4>Precio Total:</h4>
+                    <p>0</p>
+                </div>
+                <button type="button" class="btn btn-vaciarCarrito" id="botonVaciarCarrito">Vaciar Carrito</button>
+                <button type="button" class="btn btn-finalizarCompra" id="botonFinalizarCompra">Finalizar Compra</button>
+            
+            </div>
+        </div>
+    </nav>
+    <div class="navegador">
+        <input type="text" id="buscador" placeholder="Buscar...">
+    </div>
     <main class="principal">
-      <section id="catalogoVentas">
-      </section>
+        <section id="catalogoVentas"></section>
     </main>
+    <footer>
+        Hola
+    </footer>
     
     <!--Font Awesome Icons-->
     <script src="https://kit.fontawesome.com/a7eb31baec.js" crossorigin="anonymous"></script>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <!--My Script-->
+    <script src="script/flores.js"></script>
+    <script src="script/arboles.js"></script>
+    <script src="script/macetas.js"></script>
     <script src="script/script.js"></script>
-    <script src="script/script2.js"></script>
 </body>
 </html>

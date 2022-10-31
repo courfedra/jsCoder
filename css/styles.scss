@@ -1,0 +1,287 @@
+@import "variables";
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: map-get($paletaColores,'negro');
+}
+
+
+body{
+    header{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        .hidden{
+            display: none;
+        }
+        .logo{
+            width: 10%;
+            img{
+                width: 100%;
+            }
+        }
+        .layoutLogin{
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            #login{
+                max-width: 100%;
+                padding: 5px;
+                display: flex;
+                align-items: center;
+                .loguearse{
+                    padding: 5px;
+                    #textoLog,#passLogOriginal,#passLogRepetir{
+                        min-width: 100%;
+                        height: 50%;
+                        margin: 1px 0;
+                        padding: 5px;
+                        border: none;
+                        border-radius: 5px;
+                        border-bottom: 2px solid map-get($paletaColores,'negro');;
+                    }
+                    #enviarInformacion,#enviarRegistro{
+                        text-align: center;
+                        border: none;
+                        padding: 5px;
+                        margin-top: 5px;
+                        border-radius: 10px;
+                        box-shadow: 0 0 5px 1px map-get($paletaColores, 'marronMadera' );
+                        background-color: map-get($paletaColores,'verdeClaro');
+                        color: map-get($paletaColores, 'blancoHueso' );
+                        &:hover{
+                            background-color: map-get($paletaColores, 'verdeSeco' );
+                            color: map-get($paletaColores, 'negroMadera' );
+                        }
+                    }
+                }
+                
+            }
+            .botonUsuario{
+                align-self: center;
+                #botonLog{
+                    padding: 5px;
+                    margin: 5px;
+                    border: 1px solid map-get($paletaColores,'verdeOscuro');
+                    border-radius: 2.5px;
+                    background-color: map-get($paletaColores,'verdeOscuro');
+                    
+                    &:hover{
+                        background-color: map-get($paletaColores,'verdeClaro');
+                    }
+                    &:active{
+                        color: map-get($paletaColores,'negro');
+                    }
+                    i{
+                        color: map-get($paletaColores, 'blancoHueso');
+                        padding: 0 5px;
+                        letter-spacing: 2px
+                    }  
+                }
+                #botonRegistro{
+                    @extend #botonLog;
+                    background-color: map-get($paletaColores, 'verdeSeco' );
+                    i{
+                        color: map-get($paletaColores, 'negroMadera');
+                    }  
+                }
+            }
+        }
+        
+        
+        
+        
+    }
+    .navbar{
+        background-color: map-get($paletaColores, 'verdeSeco' );
+        position: sticky;
+        top: 0;
+        #carrito{
+            .bienvenidoUsuario{
+                h3{color: map-get($paletaColores,'marronMadera');letter-spacing: 2px;}
+                .cerrarSesion{
+                    border:1px solid map-get($paletaColores, 'marronMadera' );
+                }
+                
+            }
+            #precioTotal{
+                background-color: map-get($paletaColores, 'verdeClaro' );
+                display: flex;
+                justify-content: center;
+                width: 100%;
+                text-align: center;
+                font-size: 20px;
+                letter-spacing: 2px;
+            }
+            .btn-vaciarCarrito{
+                margin: 5px;
+                padding: 5px;
+                background-color: map-get($paletaColores, 'negroMadera');
+                color: map-get($paletaColores, 'blancoHueso');
+                &:hover{
+                    background-color: map-get($paletaColores, 'marronMadera');;
+                }
+            }
+            .btn-finalizarCompra{
+                margin: 5px;
+                padding: 5px;
+                background-color: map-get($paletaColores, 'verdeSeco');
+                &:hover{
+                    background-color: map-get($paletaColores, 'blancoHueso');
+                    border: 1px solid map-get($paletaColores, 'verdeSeco' );
+                }
+            }
+            
+            #carritoArticulos{
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+                .articuloEnCarrito{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    margin: 2px;
+                    padding: 2px;
+                    border-radius: 5px;
+                    border: 2px solid map-get($paletaColores, 'verdeOscuro' );
+                    img{width:25%; border-radius: 25px;}
+                    p{
+                        display: flex;
+                        justify-content: center;
+                        align-content: center;
+                        margin: 2.5px;
+                        border-radius: 15px;
+                        background-color: map-get($paletaColores, 'verdeSeco' );
+                        
+                    }
+                    #seguirAgregandoCarrito{
+                        border: none;
+                        width: 50%;
+                        border-radius: 20px;
+                        border: 1px solid map-get($paletaColores, 'verdeOscuro' );
+                        text-align: center;
+                        
+                    }
+                    .botonesCarrito{
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-evenly;
+                        .btnAgregarSacarProducto{
+                            background-color: transparent;
+                            align-self: flex-end;
+                            border: none;
+                            padding: 0 5px;
+                            font-size: 32px;
+                            i{
+                                color: map-get($paletaColores, 'marronMadera' );
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .navegador{
+        width: 100%;
+        background-color: #1bfa1b33;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        padding: 5px 0;
+        #buscador{
+            border-color: #00aa00;
+            border-radius: 10px;
+            padding: 5px;
+            margin:10px 0;
+            width: 50%;
+            align-self: center;
+        }
+        .filtros{
+            display: flex;
+            justify-content: space-around;
+            .filtroColores{
+                padding: 5px;
+            }
+        }
+    }
+    .principal{
+        width: 100%;
+        display: flex;
+        outline: hidden;
+        #catalogoVentas{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+            .hidden{
+                display: none;
+            }
+            .articulo{
+                display: flex;
+                flex-direction: column;
+                width: 250px;
+                height: 350px;
+                margin: 10px;
+                align-items: center;
+                text-align: justify;
+                background-color: #00ff0075;   
+                box-shadow: 0px 0px 10px #00aa00ff;            
+                border-radius: 7.5px;
+                h2{
+                    text-align: center;
+                    font-size: 24px;
+                }
+                img{
+                    width:70%;
+                    height: 35%;
+                    border-radius: 10px;
+                    align-self: center;
+                }
+                ul{
+                    list-style: none;
+                    padding: 5px;
+                }
+                .btnCompra{
+                    width: 200px;
+                    border-radius: 5px;
+                    letter-spacing: 2.5px;
+                    text-transform: uppercase;
+                    color: black;
+                }
+                .btnEliminar{
+                    background-color: #ff0000;
+                }
+                .sinStock{
+                    background-color: #ff0000;
+                    border: 2px solid #ff0000;
+                    &:hover{
+                        background-color: #ff000044;
+                    }
+                    &:active{
+                        background-color: #6d00009a;
+                        border: 2px solid #6d0000;
+                    }
+                }
+                .conStock{
+                    background-color: #00aa00;
+                    border: 2px solid #00aa00;
+                    &:hover{
+                        background-color: #00aa00;
+                    }
+                    &:active{
+                        background-color: #3c3d01;
+                        border: 2px solid #3c3d01;
+                    }
+                }
+            }
+        }
+    }
+    footer{
+        background-color: #333;
+        min-height: 15vh;
+
+    }
+}

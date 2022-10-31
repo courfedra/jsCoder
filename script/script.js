@@ -1,24 +1,385 @@
+//array para agregar los productos con stock
+let listaProductosCompleta=[];
+//filtro los productos con stock
+let listaProductosConStock = [];
+//lista de productos filtrados
+let arrayProductosFiltrados=[];
+//array para agregar la lista de nombres productos con stock
+let listaProductosNombre = [];
+//variable a usar para la barra de busqueda
+let palabraFiltrada=""
+//Array para ir agregarndo los productos seleccionados al carrito
+let carrito=[]
+//Variable para guardar el nombre del usuario al iniciar sesion
+let nombreComprador;
 
-//Objetos - nombre, precio y stock
-function Producto(id,nombre,precio,stock,categoria,img){
-    this.id = id;
-    this.sumCarrito = 1;
-    this.nombre = nombre;
-    this.precio = precio;
-    this.stock = stock||0;
-    this.stockTope = stock||0;
-    this.categoria = categoria;
-    this.img = img;
+//para limpiar storage al comprobar guardados y cargados
+//localStorage.clear()
+
+
+//variable donde almacenaremos los productos agregados al carrito
+let contenedorCarrito = document.getElementById("carritoArticulos")
+//variable contenedora de las card de los productos con stock
+let catalogo = document.getElementById("catalogoVentas");
+//variable donde le asigno el nombre del usuario al carrito
+let nombreCarrito = document.getElementById("nombreCarrito")
+//boton que permite guardar el nombre ingresado por el usuario
+const botonLogin = document.getElementById("botonLog");
+//boton que permite registrar el usuario
+const botonRegistro = document.getElementById("botonRegistro");
+//variable del layout del inicio de sesion
+let pantallaLogin = document.getElementById("login")
+//boton para vaciar el carrito completo
+const btnVaciarCarrito = document.getElementById("botonVaciarCarrito")
+
+//funcion para crear los objetos en caso de no tener registros previos de ellos
+function crearObjetos(){
+    listaProductosCompleta = listaFlores.concat(listaArboles,listaMacetas)
+    
+    listaProductosConStock = listaProductosCompleta.filter((elemento)=>elemento.stock>0);
+
+    //Prepara una lista de solo los nombres de los productos que tienen stock
+    for(const producto of listaProductosConStock){
+        listaProductosNombre.push(producto.nombre);
+    }
 }
 
-//Flores,Arbustos y Arboles
-let productoA = new Producto(1,'Flor Roja',120,7,"flor","./img/florRoja.jpg");
-let productoB = new Producto(2,'Flor Blanca',150,9,"flor","./img/florBlanca.jpg");
-let productoC = new Producto(3,'Flor Azul',100,12,"flor","./img/florAzul.jpg");
-let productoD = new Producto(4,'Flor Amarilla',200,5,"flor","./img/florAmarilla.jpg");
-let productoE = new Producto(5,'Flor Naranja',1500,11,"flor","./img/florNaranja.jpg");
-let productoF = new Producto(6,'Flor Rosa',1000,5,"flor","./img/florRosa.jpg");
-let productoG = new Producto(7,'Arbol Pequeño',2000,21,"arbol","./img/logoArbolOriginal.jpg");
-let productoH = new Producto(8,'Arbol Grande',4000,4,"arbol","./img/logoArbolOriginal.jpg");
-let productoI = new Producto(9,'Arbusto Pequeño',500,10,"arbusto","./img/logoArbolOriginal.jpg");
-let productoJ = new Producto(10,'Zrbusto Grande',475,1,"arbusto","./img/logoArbolOriginal.jpg");
+//funcion para crear y actualizar el layout con las interacciones del usuario
+function crearLayout(listaProductosLayout){
+    catalogo.innerHTML =""
+    
+    for(const producto of listaProductosLayout){
+        articulo = document.createElement("div");
+        articulo.className = "articulo";
+        articulo.innerHTML=`
+            <h2>${producto.nombre}</h2>
+            <img src="${producto.img}"></img>
+            <ul>
+                <li><p>Stock: <b>${producto.stock}</b> unidades.</p></li>
+                <li><p>Precio: $<b>${producto.precio}</b></p></li>
+            </ul>
+            <button id="agregar${producto.id}" class="btnCompra">Agregar<i class="fa-solid fa-cart-shopping"></i></button>`
+        catalogo.append(articulo);
+        const botonAgregar = document.getElementById(`agregar${producto.id}`)
+        botonAgregar.addEventListener('click',()=>{agregarCarrito(producto.id)})
+        if(producto.stock===0){
+            botonAgregar.classList.add("sinStock")
+            botonAgregar.classList.remove("conStock")
+        }else{
+            botonAgregar.classList.add("conStock")
+            botonAgregar.classList.remove("sinStock")
+        }
+    }
+}
+
+
+//comprobamos el estado y procedemos
+function comprobarStorage(){
+    //asignamos a valor Jason el contenido, si es que tiene, para proceder a llenarlo o recuperar informacion
+    let valorJson=JSON.parse(localStorage.getItem('listaProductosConStock'))
+    if (valorJson==null){
+        crearObjetos()
+        localStorage.setItem("carrito",JSON.stringify(carrito))
+        localStorage.setItem("listaProductosConStock",JSON.stringify(listaProductosConStock))
+        listaProductosConStock=JSON.parse(localStorage.getItem('listaProductosConStock'))
+    }else{
+        listaProductosConStock=JSON.parse(localStorage.getItem('listaProductosConStock'));
+        carrito=JSON.parse(localStorage.getItem('carrito'))
+
+    }
+}
+
+//funcion que guarda los cambios realizados en el storage
+function guardarStorageLayout(){
+    localStorage.setItem("listaProductosConStock",JSON.stringify(listaProductosConStock))
+}
+
+
+//INICIO DE SESION
+
+//Registrar una cuenta nueva en el local storage
+botonRegistro.addEventListener('click',()=>{
+    pantallaLogin.innerHTML=""
+        registrar = document.createElement("div");
+        registrar.className = "loguearse";
+        registrar.innerHTML=`
+            
+            <input type="text" id="textoLog" placeholder="Nombre">
+            <input type="password" id="passLogOriginal" placeholder="Nueva Contraseña"></input>
+            <input type="password" id="passLogRepetir" placeholder="Repetir Contraseña"></input>
+            <button id="enviarRegistro" type="button">Registrarse</button>
+            `
+
+        pantallaLogin.append(registrar);
+        const enviarRegistro = document.getElementById("enviarRegistro")
+        enviarRegistro.addEventListener('click',()=>{
+            let nombre=document.getElementById("textoLog")
+            let passLogOriginal=document.getElementById("passLogOriginal")
+            let passLogRepetir=document.getElementById("passLogRepetir")
+            nombre=nombre.value
+            passLogOriginal=passLogOriginal.value
+            passLogRepetir=passLogRepetir.value
+            passLogOriginal===passLogRepetir ? crearCuenta(nombre,passLogOriginal):pantallaLogin.innerHTML="";
+        })
+        
+})
+
+//funcion para crear una cuenta y almacenarla en el storage
+function crearCuenta(nombreUser,passUser){
+    localStorage.setItem(`usuario${nombreUser}`,JSON.stringify(nombreUser))
+    localStorage.setItem(`password${nombreUser}`,passUser)
+    alert("Cuenta creada con exito")
+    pantallaLogin.innerHTML=""
+}
+
+//Loguearse
+botonLogin.addEventListener('click',()=>{
+        pantallaLogin.innerHTML=""
+        loguear = document.createElement("div");
+        loguear.className = "loguearse";
+        loguear.innerHTML=`
+            
+            <input type="text" id="textoLog" placeholder="Nombre">
+            <input type="password" id="passLogOriginal" placeholder="Nueva Contraseña"></input>
+            <button id="enviarInformacion" type="button">Loguearse</button>
+            `
+
+        pantallaLogin.append(loguear);
+        const enviarInformacion = document.getElementById("enviarInformacion")
+        enviarInformacion.addEventListener('click',()=>{
+            let nombre=document.getElementById("textoLog")
+            let passLogOriginal=document.getElementById("passLogOriginal")
+            nombre=nombre.value
+            passLogOriginal=passLogOriginal.value
+            //RECUPERAR DEL STORAGE
+            loguearCuenta(nombre,passLogOriginal)
+            pantallaLogin.innerHTML=""
+        })
+        
+})
+
+function loguearCuenta(nombreUser,passUser){
+    let nombreGuardado=JSON.parse(localStorage.getItem(`usuario${nombreUser}`));
+    let passGuardada=localStorage.getItem(`password${nombreUser}`);
+    if((nombreGuardado==nombreUser)&&(passGuardada==passUser)){
+        alert("Bienvenido")
+        mostrarLoginLayout(nombreGuardado)
+    }else{alert("Algo pusiste mal")}
+}
+
+
+//Registrar una cuenta nueva en el local storage
+let usuarioLogueado=document.getElementById("usuarioLogueado");
+
+//mostrar en pantalla el estado iniciado de sesion con nombre de usuario
+function mostrarLoginLayout(usuario){
+    usuarioLogueado.innerHTML=""
+    bienvenidoUsuario = document.createElement("div");
+        bienvenidoUsuario.className = "bienvenidoUsuario";
+        bienvenidoUsuario.innerHTML=
+            `
+            <h3>Bienvenido ${usuario}!
+            <button id="cerrarSesion" class="btn cerrarSesion" >Cerrar sesion</button>
+            `
+        usuarioLogueado.append(bienvenidoUsuario);
+        //cambiar botonoes de inicio y registro por cerrar sesion y que funcione
+        const botonCerrarSesion=document.getElementById("cerrarSesion")
+        botonCerrarSesion.addEventListener('click',()=>{
+            bienvenidoUsuario.innerHTML=""
+        })
+}
+
+
+//BARRA DE BUSQUEDA
+let buscador
+buscador=document.getElementById("buscador")
+buscador.addEventListener("input",()=>{
+
+    if(buscador.value!==""){
+        compararProductoBusqueda(buscador.value)
+    }else{
+        palabraFiltrada=0;
+        compararProductoBusqueda(palabraFiltrada)
+    }
+})
+
+
+
+// funcion de comparar la palabra ingresada con el nombre de los articulos
+//Borra productos fuera del buscador
+function compararProductoBusqueda(letraPalabra){
+    if(letraPalabra!==0){
+        arrayProductosFiltrados=[]
+        for(prod of listaProductosConStock){
+                letraPalabra=letraPalabra.toLowerCase()
+                let nombreProducto=prod.nombre.toLowerCase()
+            if(nombreProducto.includes(letraPalabra)){
+                arrayProductosFiltrados.push(prod)
+            }
+        }
+        crearLayout(arrayProductosFiltrados);
+    }else{
+        crearLayout(listaProductosConStock)
+    }
+}
+
+//funcion que guarda los cambios relizados en el carrito
+function guardarStorageCarrito(){
+    localStorage.setItem("carrito",JSON.stringify(carrito))
+}
+
+//funcion que carga la informacion guardada al carrito
+function cargarCarritoStorage(){
+    carrito=JSON.parse(localStorage.getItem('carrito'))
+}
+
+
+//BOTON VACIAR CARRITO
+btnVaciarCarrito.addEventListener("click",()=>{
+    //actualizo todos los stock y valores iniciales
+    for(const prod of carrito){
+        console.log("CARRITO: nombre "+prod.nombre+" y stock "+prod.stock)
+        prod.stock=prod.stockTope
+        prod.sumCarrito=1;
+        console.log("CARRITO: nombre "+prod.nombre+" y stock "+prod.stock)
+    }
+    //RENUEVO STOCK DE LISTA CON STOCK
+    //ERROR QUE SURGIA AL RECARGAR LA PAG Y LUEGO VACIAR CARRITO
+    for(const prod of listaProductosConStock){
+        prod.stock=prod.stockTope
+        prod.sumCarrito=1;
+    }
+
+    carrito.length=0;
+    actualizarCarrito()
+    crearLayout(listaProductosConStock)
+    guardarStorageLayout()
+    guardarStorageCarrito()
+})
+
+
+//AGREGAR AL CARRITO CON CADA CLICK
+const agregarCarrito = (prodId) => {
+
+    //controlar cantidad de stock para permitir compra
+    const item = listaProductosConStock.find((prod)=>prod.id===prodId)
+    //variable para saber que hacer si esta repetido
+    let itemRepetido = carrito.some((prod)=>prod.id===item.id)
+    //controlo que la compra no supere la cantidad de stock
+    if(item.stock >0){
+        //si esta repetido, aumento el contador de sumCarrito
+        if (itemRepetido==true){
+            item.sumCarrito+=1
+            item.stock-=1
+            
+            actualizarCarrito()
+        }else{//si no esta repetido, agrego el producto entero
+            carrito.push(item)
+            item.stock-=1
+            actualizarCarrito()
+        }
+    }
+    guardarStorageLayout()
+    guardarStorageCarrito()
+    crearLayout(listaProductosConStock)
+    
+}
+
+//Agregar unidades del producto al carrito
+const agregarUnidadCarrito = (prodId)=>{
+    //Selecciono el item del carrito
+    const item = carrito.find((prod)=>prod.id === prodId)
+    //consulto el stock actual del item en carrito y procedo a if
+    item.sumCarrito<item.stockTope && agregarCarrito(prodId);
+    
+    guardarStorageLayout()
+    guardarStorageCarrito()
+    actualizarCarrito();
+    crearLayout(listaProductosConStock)
+}
+
+//restar unidades del producto del carrito
+const eliminarUnidadCarrito = (prodId)=>{
+    //Selecciono el item del carrito
+    const item = carrito.find((prod)=>prod.id === prodId)
+    //consulto el stock actual del item en carrito y procedo a if
+    if (item.sumCarrito>1){
+        item.sumCarrito-=1
+        item.stock+=1;
+    }else{eliminarCarrito(prodId)}
+    guardarStorageLayout()
+    guardarStorageCarrito()
+    actualizarCarrito();
+    crearLayout(listaProductosConStock)
+}
+
+
+//Elimiar producto especifico del carrito
+const eliminarCarrito = (prodId)=>{
+    //Selecciono el item del carrito
+    const item = carrito.find((prod)=>prod.id === prodId)
+    //busco indice donde esta el item a retirar
+    const indice = carrito.indexOf(item)
+    //elimino el articulo
+    carrito.splice(indice,1);
+    //actualizo a stock original
+    item.stock=item.stockTope;
+    //Actualizo a valor inicial la cantidad de elementos para sumar al carrito
+    item.sumCarrito=1
+    guardarStorageLayout()
+    guardarStorageCarrito()
+    actualizarCarrito();
+    crearLayout(listaProductosConStock)
+}
+
+
+//REGISTRA CUALQUIER CAMBIO EN EL CARRITO, ELIMINACION O AGREGADO
+const actualizarCarrito = () =>{
+    contenedorCarrito.innerHTML="";
+    carrito.forEach((prod)=>{
+        const div = document.createElement("div")
+        div.className = ("articuloEnCarrito")
+        div.innerHTML=`
+            <img src="${prod.img}">
+            <p>${prod.nombre}</p>
+            <p>Cantidad:<span id="cantidad">${prod.sumCarrito}</span></p>
+            <p>Precio unidad: $${prod.precio}</p>
+            <p>Precio total: $${(prod.precio)*(prod.sumCarrito)}</p>
+            <div class="botonesCarrito">
+                <button onclick="agregarUnidadCarrito(${prod.id})" class="btnAgregarSacarProducto"><i class="fa-regular fa-plus">  1  </i></button>
+                <button onclick="eliminarUnidadCarrito(${prod.id})" class="btnAgregarSacarProducto"><i class="fa-solid fa-delete-left">  1  </i></button>
+                <button onclick="eliminarCarrito(${prod.id})" class="btnAgregarSacarProducto"><i class="fas fa-trash-alt"></i></button>
+            </div>
+        `
+        contenedorCarrito.append(div)
+        
+    })
+    //CANTIDAD DE PRODUCTOS EN CARRITO
+    let contadorArticulos = document.getElementById("contadorArticulos")
+    let contadorTotal=0
+    carrito.forEach((prod)=>{
+        contadorTotal+=prod.sumCarrito
+        }
+    )
+    contadorArticulos.innerText=contadorTotal;
+    //PRECIO TOTAL DE PRODUCTOS EN CARRITO
+    let precioTotal = document.getElementById("precioTotal")
+    let sumPrecios=0
+    carrito.forEach((prod)=>{
+        sumPrecios+=(prod.precio)*(prod.sumCarrito)
+        }
+    )
+    precioTotal.innerText=`El precio total es de: $${sumPrecios}`;
+}
+
+//CARGO TODA LA PAGINA POR PRIMERA VEZ, COMPROBANDO STORAGE Y CARGANDO LA INFORMACION
+
+
+
+
+//
+comprobarStorage()
+cargarCarritoStorage()
+
+crearLayout(listaProductosConStock)
+actualizarCarrito()
