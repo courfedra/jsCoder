@@ -13,8 +13,9 @@ let carrito=[]
 //Variable para guardar el nombre del usuario al iniciar sesion
 let nombreComprador;
 
-//para limpiar storage al comprobar guardados y cargados
-//localStorage.clear()
+
+//boton para borrar storage
+let btnBorrarStorage=document.getElementById("btnBorrarStorage")
 
 
 //variable donde almacenaremos los productos agregados al carrito
@@ -56,7 +57,7 @@ fetch('https://api.getgeoapi.com/v2/ip/check?api_key=e54eecc4dbf75015bfa538699b0
 //funcion para crear los objetos en caso de no tener registros previos de ellos
 function crearObjetos(){
     listaProductosCompleta = listaFlores.concat(listaArboles,listaMacetas)
-    
+
     listaProductosConStock = listaProductosCompleta.filter((elemento)=>elemento.stock>0);
 
     //Prepara una lista de solo los nombres de los productos que tienen stock
@@ -68,7 +69,7 @@ function crearObjetos(){
 //funcion para crear y actualizar el layout con las interacciones del usuario
 function crearLayout(listaProductosLayout){
     catalogo.innerHTML =""
-    
+
     for(const producto of listaProductosLayout){
         articulo = document.createElement("div");
         articulo.className = "articulo";
@@ -126,7 +127,7 @@ botonRegistro.addEventListener('click',()=>{
         registrar = document.createElement("div");
         registrar.className = "loguearse";
         registrar.innerHTML=`
-            
+
             <input type="text" id="textoLog" placeholder="Nombre">
             <input type="password" id="passLogOriginal" placeholder="Nueva Contraseña"></input>
             <input type="password" id="passLogRepetir" placeholder="Repetir Contraseña"></input>
@@ -144,7 +145,7 @@ botonRegistro.addEventListener('click',()=>{
             passLogRepetir=passLogRepetir.value
             passLogOriginal===passLogRepetir ? crearCuenta(nombre,passLogOriginal):pantallaLogin.innerHTML="";
         })
-        
+
 })
 
 //funcion para crear una cuenta y almacenarla en el storage
@@ -161,7 +162,7 @@ botonLogin.addEventListener('click',()=>{
         loguear = document.createElement("div");
         loguear.className = "loguearse";
         loguear.innerHTML=`
-            
+
             <input type="text" id="textoLog" placeholder="Nombre">
             <input type="password" id="passLogOriginal" placeholder="Nueva Contraseña"></input>
             <button id="enviarInformacion" type="button">Loguearse</button>
@@ -178,7 +179,7 @@ botonLogin.addEventListener('click',()=>{
             loguearCuenta(nombre,passLogOriginal)
             pantallaLogin.innerHTML=""
         })
-        
+
 })
 
 function loguearCuenta(nombreUser,passUser){
@@ -232,6 +233,11 @@ function mostrarLoginLayout(usuario){
             //guardar login en storage
         })
 }
+
+
+
+
+
 
 
 //BARRA DE BUSQUEDA
@@ -488,8 +494,8 @@ const actualizarCarrito = () =>{
 
 //CARGO TODA LA PAGINA POR PRIMERA VEZ, COMPROBANDO STORAGE Y CARGANDO LA INFORMACION
 
-
-
+//boton para borrar storage ante cualquier necesidad del desarrollador o el tester
+btnBorrarStorage.addEventListener("click",()=>{localStorage.clear()})
 
 //
 comprobarStorage()
