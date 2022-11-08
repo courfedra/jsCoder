@@ -22,6 +22,19 @@ body{
                 width: 100%;
             }
         }
+        #headerLogin{
+            .bienvenidoUsuario{
+                width: 100%;
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                h3{color: map-get($paletaColores,'marronMadera');letter-spacing: 2px;}
+                .cerrarSesion{
+                    border:1px solid map-get($paletaColores, 'marronMadera' );
+                }
+                
+            }
+        }
         .layoutLogin{
             display: flex;
             width: 100%;
@@ -99,13 +112,6 @@ body{
         position: sticky;
         top: 0;
         #carrito{
-            .bienvenidoUsuario{
-                h3{color: map-get($paletaColores,'marronMadera');letter-spacing: 2px;}
-                .cerrarSesion{
-                    border:1px solid map-get($paletaColores, 'marronMadera' );
-                }
-                
-            }
             #precioTotal{
                 background-color: map-get($paletaColores, 'verdeClaro' );
                 display: flex;

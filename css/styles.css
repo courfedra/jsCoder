@@ -19,6 +19,19 @@ body header .logo {
 body header .logo img {
   width: 100%;
 }
+body header #headerLogin .bienvenidoUsuario {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+body header #headerLogin .bienvenidoUsuario h3 {
+  color: #af8300;
+  letter-spacing: 2px;
+}
+body header #headerLogin .bienvenidoUsuario .cerrarSesion {
+  border: 1px solid #af8300;
+}
 body header .layoutLogin {
   display: flex;
   width: 100%;
@@ -88,13 +101,6 @@ body .navbar {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
-}
-body .navbar #carrito .bienvenidoUsuario h3 {
-  color: #af8300;
-  letter-spacing: 2px;
-}
-body .navbar #carrito .bienvenidoUsuario .cerrarSesion {
-  border: 1px solid #af8300;
 }
 body .navbar #carrito #precioTotal {
   background-color: #69ab3d;
@@ -270,4 +276,4 @@ body .principal #catalogoVentas .articulo .conStock:active {
 body footer {
   background-color: #333;
   min-height: 15vh;
-}/*# sourceMappingURL=otroCss.css.map */
+}/*# sourceMappingURL=styles.css.map */

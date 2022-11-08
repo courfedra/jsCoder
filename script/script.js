@@ -29,8 +29,29 @@ const botonLogin = document.getElementById("botonLog");
 const botonRegistro = document.getElementById("botonRegistro");
 //variable del layout del inicio de sesion
 let pantallaLogin = document.getElementById("login")
+//variable para asignar el ingreso a la sesion
+let headerLogin = document.getElementById("headerLogin")
 //boton para vaciar el carrito completo
 const btnVaciarCarrito = document.getElementById("botonVaciarCarrito")
+//boton para finalizar compra del carrito
+const btnFinalizarCompra = document.getElementById("botonFinalizarCompra")
+
+//variable para agregar info de ubicacion
+let ubicacion=document.getElementById("ubicacion");
+let ubicacionEnvio
+fetch('https://api.getgeoapi.com/v2/ip/check?api_key=e54eecc4dbf75015bfa538699b0e61bd4784ee86&format={jason}')
+	.then(response => response.json())
+	.then(data => {
+        console.log(data);
+        ubicacionEnvio=data.city.name
+        ciudad = document.createElement("div");
+        ciudad.className = "articulo";
+        ciudad.innerHTML=`<h2>Tenemos envios a ${ubicacionEnvio}, que suerte!</h2>`
+        ubicacion.append(ciudad);
+    })
+	.catch(err => console.error(err));
+
+
 
 //funcion para crear los objetos en caso de no tener registros previos de ellos
 function crearObjetos(){
@@ -97,6 +118,8 @@ function guardarStorageLayout(){
 
 //INICIO DE SESION
 
+//ARREGLAR PARA CASO DE CERRAR SESION Y AGREGAR SWEET ALERT DE SEGURO SALIR
+
 //Registrar una cuenta nueva en el local storage
 botonRegistro.addEventListener('click',()=>{
     pantallaLogin.innerHTML=""
@@ -162,18 +185,36 @@ function loguearCuenta(nombreUser,passUser){
     let nombreGuardado=JSON.parse(localStorage.getItem(`usuario${nombreUser}`));
     let passGuardada=localStorage.getItem(`password${nombreUser}`);
     if((nombreGuardado==nombreUser)&&(passGuardada==passUser)){
-        alert("Bienvenido")
         mostrarLoginLayout(nombreGuardado)
-    }else{alert("Algo pusiste mal")}
+        Toastify({
+            text: "Logueado correctamente",
+            className: "info",
+            gravity:"top",
+            position:"right",
+            style: {
+              background: "linear-gradient(to right, #295d09, #295d09)",
+              color:"#e9ebed"
+            }
+          }).showToast();
+    }else{
+        Toastify({
+            text: "Error",
+            className: "info",
+            gravity:"top",
+            position:"right",
+            style: {
+              background: "linear-gradient(to right, #660000, #ff0000)",
+              color:"#e9ebed"
+            }
+          }).showToast();
+    }
 }
 
 
-//Registrar una cuenta nueva en el local storage
-let usuarioLogueado=document.getElementById("usuarioLogueado");
 
 //mostrar en pantalla el estado iniciado de sesion con nombre de usuario
 function mostrarLoginLayout(usuario){
-    usuarioLogueado.innerHTML=""
+    headerLogin.innerHTML=""
     bienvenidoUsuario = document.createElement("div");
         bienvenidoUsuario.className = "bienvenidoUsuario";
         bienvenidoUsuario.innerHTML=
@@ -181,16 +222,21 @@ function mostrarLoginLayout(usuario){
             <h3>Bienvenido ${usuario}!
             <button id="cerrarSesion" class="btn cerrarSesion" >Cerrar sesion</button>
             `
-        usuarioLogueado.append(bienvenidoUsuario);
+        headerLogin.append(bienvenidoUsuario);
         //cambiar botonoes de inicio y registro por cerrar sesion y que funcione
         const botonCerrarSesion=document.getElementById("cerrarSesion")
         botonCerrarSesion.addEventListener('click',()=>{
             bienvenidoUsuario.innerHTML=""
+            //Recuperar botones de inicio y crear cuenta al salir sesion
+
+            //guardar login en storage
         })
 }
 
 
 //BARRA DE BUSQUEDA
+
+
 let buscador
 buscador=document.getElementById("buscador")
 buscador.addEventListener("input",()=>{
@@ -238,10 +284,47 @@ function cargarCarritoStorage(){
 btnVaciarCarrito.addEventListener("click",()=>{
     //actualizo todos los stock y valores iniciales
     for(const prod of carrito){
-        console.log("CARRITO: nombre "+prod.nombre+" y stock "+prod.stock)
         prod.stock=prod.stockTope
         prod.sumCarrito=1;
-        console.log("CARRITO: nombre "+prod.nombre+" y stock "+prod.stock)
+    }
+    //RENUEVO STOCK DE LISTA CON STOCK
+    //ERROR QUE SURGIA AL RECARGAR LA PAG Y LUEGO VACIAR CARRITO
+    for(const prod of listaProductosConStock){
+        prod.stock=prod.stockTope
+        prod.sumCarrito=1;
+    }
+
+    carrito.length=0;
+    actualizarCarrito()
+    crearLayout(listaProductosConStock)
+    guardarStorageLayout()
+    guardarStorageCarrito()
+    Toastify({
+        text: "Carrito vaciado",
+        className: "info",
+        gravity:"bottom",
+        position:"left",
+        style: {
+          background: "linear-gradient(to right, #d10000, #d10000)",
+          color:"#e9ebed"
+        }
+      }).showToast();
+})
+
+btnFinalizarCompra.addEventListener("click",()=>{
+    Swal.fire({
+        title: '¡Compra realizada con exito!',
+        icon: 'success',
+        text:`Sera enviada a ${ubicacionEnvio}`,
+        timer: 5000,
+      })
+
+    //Realizo la misma ejecucion del boton vaciar carrito
+
+    //actualizo todos los stock y valores iniciales
+    for(const prod of carrito){
+        prod.stock=prod.stockTope
+        prod.sumCarrito=1;
     }
     //RENUEVO STOCK DE LISTA CON STOCK
     //ERROR QUE SURGIA AL RECARGAR LA PAG Y LUEGO VACIAR CARRITO
@@ -256,7 +339,6 @@ btnVaciarCarrito.addEventListener("click",()=>{
     guardarStorageLayout()
     guardarStorageCarrito()
 })
-
 
 //AGREGAR AL CARRITO CON CADA CLICK
 const agregarCarrito = (prodId) => {
@@ -279,6 +361,17 @@ const agregarCarrito = (prodId) => {
             actualizarCarrito()
         }
     }
+    Toastify({
+        text: "Agregado al carrito",
+        className: "info",
+        gravity:"bottom",
+        position:"left",
+        style: {
+          background: "linear-gradient(to right, #69ab3d, #aed36c)",
+          color:"#463500"
+        }
+      }).showToast();
+    
     guardarStorageLayout()
     guardarStorageCarrito()
     crearLayout(listaProductosConStock)
@@ -311,6 +404,16 @@ const eliminarUnidadCarrito = (prodId)=>{
     guardarStorageCarrito()
     actualizarCarrito();
     crearLayout(listaProductosConStock)
+    Toastify({
+        text: "Eliminado correctamente",
+        className: "info",
+        gravity:"bottom",
+        position:"left",
+        style: {
+          background: "linear-gradient(to right, #d10000, #d10000)",
+          color:"#e9ebed"
+        }
+      }).showToast();
 }
 
 
@@ -326,10 +429,21 @@ const eliminarCarrito = (prodId)=>{
     item.stock=item.stockTope;
     //Actualizo a valor inicial la cantidad de elementos para sumar al carrito
     item.sumCarrito=1
+    
     guardarStorageLayout()
     guardarStorageCarrito()
     actualizarCarrito();
     crearLayout(listaProductosConStock)
+    Toastify({
+        text: "Producto eliminado",
+        className: "info",
+        gravity:"bottom",
+        position:"left",
+        style: {
+          background: "linear-gradient(to right, #d10000, #d10000)",
+          color:"#e9ebed"
+        }
+      }).showToast();
 }
 
 
