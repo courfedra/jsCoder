@@ -46,8 +46,7 @@ fetch('https://api.getgeoapi.com/v2/ip/check?api_key=e54eecc4dbf75015bfa538699b0
         console.log(data);
         ubicacionEnvio=data.city.name
         ciudad = document.createElement("div");
-        ciudad.className = "articulo";
-        ciudad.innerHTML=`<h2>Tenemos envios a ${ubicacionEnvio}, que suerte!</h2>`
+        ciudad.innerHTML=`<h2>Nuestros envíos llegan a <b>${ubicacionEnvio}</b>!</h2>`
         ubicacion.append(ciudad);
     })
 	.catch(err => console.error(err));
@@ -152,7 +151,16 @@ botonRegistro.addEventListener('click',()=>{
 function crearCuenta(nombreUser,passUser){
     localStorage.setItem(`usuario${nombreUser}`,JSON.stringify(nombreUser))
     localStorage.setItem(`password${nombreUser}`,passUser)
-    alert("Cuenta creada con exito")
+    Toastify({
+        text: "Cuenta creada exitosamente",
+        className: "info",
+        gravity:"top",
+        position:"right",
+        style: {
+          background: "linear-gradient(to right, #295d09, #295d09)",
+          color:"#e9ebed"
+        }
+      }).showToast();
     pantallaLogin.innerHTML=""
 }
 
@@ -224,19 +232,14 @@ function mostrarLoginLayout(usuario){
             <button id="cerrarSesion" class="btn cerrarSesion" >Cerrar sesion</button>
             `
         headerLogin.append(bienvenidoUsuario);
-        //cambiar botonoes de inicio y registro por cerrar sesion y que funcione
         const botonCerrarSesion=document.getElementById("cerrarSesion")
         botonCerrarSesion.addEventListener('click',()=>{
             bienvenidoUsuario.innerHTML=""
-            //Recuperar botones de inicio y crear cuenta al salir sesion
 
-            //guardar login en storage
+            //Recuperar botones de inicio y crear cuenta al salir sesion
+            //guardar login en storage al recargar la pagina
         })
 }
-
-
-
-
 
 
 
@@ -359,29 +362,26 @@ const agregarCarrito = (prodId) => {
         if (itemRepetido==true){
             item.sumCarrito+=1
             item.stock-=1
-            
             actualizarCarrito()
         }else{//si no esta repetido, agrego el producto entero
             carrito.push(item)
             item.stock-=1
             actualizarCarrito()
         }
+        Toastify({
+            text: "Agregado al carrito",
+            className: "info",
+            gravity:"bottom",
+            position:"left",
+            style: {
+              background: "linear-gradient(to right, #69ab3d, #aed36c)",
+              color:"#463500"
+            }
+          }).showToast();
     }
-    Toastify({
-        text: "Agregado al carrito",
-        className: "info",
-        gravity:"bottom",
-        position:"left",
-        style: {
-          background: "linear-gradient(to right, #69ab3d, #aed36c)",
-          color:"#463500"
-        }
-      }).showToast();
-    
     guardarStorageLayout()
     guardarStorageCarrito()
     crearLayout(listaProductosConStock)
-    
 }
 
 //Agregar unidades del producto al carrito
@@ -390,7 +390,6 @@ const agregarUnidadCarrito = (prodId)=>{
     const item = carrito.find((prod)=>prod.id === prodId)
     //consulto el stock actual del item en carrito y procedo a if
     item.sumCarrito<item.stockTope && agregarCarrito(prodId);
-    
     guardarStorageLayout()
     guardarStorageCarrito()
     actualizarCarrito();
@@ -435,7 +434,6 @@ const eliminarCarrito = (prodId)=>{
     item.stock=item.stockTope;
     //Actualizo a valor inicial la cantidad de elementos para sumar al carrito
     item.sumCarrito=1
-    
     guardarStorageLayout()
     guardarStorageCarrito()
     actualizarCarrito();
@@ -472,7 +470,7 @@ const actualizarCarrito = () =>{
             </div>
         `
         contenedorCarrito.append(div)
-        
+
     })
     //CANTIDAD DE PRODUCTOS EN CARRITO
     let contadorArticulos = document.getElementById("contadorArticulos")
@@ -492,14 +490,26 @@ const actualizarCarrito = () =>{
     precioTotal.innerText=`El precio total es de: $${sumPrecios}`;
 }
 
-//CARGO TODA LA PAGINA POR PRIMERA VEZ, COMPROBANDO STORAGE Y CARGANDO LA INFORMACION
+
 
 //boton para borrar storage ante cualquier necesidad del desarrollador o el tester
-btnBorrarStorage.addEventListener("click",()=>{localStorage.clear()})
+btnBorrarStorage.addEventListener("click",()=>{
+    localStorage.clear();
+    Toastify({
+        text: "Storage Borrado, RECARGUE LA PÁGINA",
+        className: "info",
+        gravity:"bottom",
+        position:"left",
+        style: {
+          background: "#d10000",
+          color:"#ffffff"
+        }
+      }).showToast();
+})
 
+//CARGO TODA LA PAGINA POR PRIMERA VEZ, COMPROBANDO STORAGE Y CARGANDO LA INFORMACION
 //
 comprobarStorage()
 cargarCarritoStorage()
-
 crearLayout(listaProductosConStock)
 actualizarCarrito()
