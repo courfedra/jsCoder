@@ -16,29 +16,31 @@ let nombreComprador;
 
 //boton para borrar storage
 let btnBorrarStorage=document.getElementById("btnBorrarStorage")
-
-
+//variable donde ingresan la palabra a buscar
+let buscador=document.getElementById("buscador")
 //variable donde almacenaremos los productos agregados al carrito
 let contenedorCarrito = document.getElementById("carritoArticulos")
 //variable contenedora de las card de los productos con stock
 let catalogo = document.getElementById("catalogoVentas");
 //variable donde le asigno el nombre del usuario al carrito
 let nombreCarrito = document.getElementById("nombreCarrito")
-//boton que permite guardar el nombre ingresado por el usuario
-const botonLogin = document.getElementById("botonLog");
-//boton que permite registrar el usuario
-const botonRegistro = document.getElementById("botonRegistro");
-//variable del layout del inicio de sesion
-let pantallaLogin = document.getElementById("login")
-//variable para asignar el ingreso a la sesion
-let headerLogin = document.getElementById("headerLogin")
 //boton para vaciar el carrito completo
 const btnVaciarCarrito = document.getElementById("botonVaciarCarrito")
 //boton para finalizar compra del carrito
 const btnFinalizarCompra = document.getElementById("botonFinalizarCompra")
+//variable del layout del inicio de sesion
+let pantallaLogin = document.getElementById("login")
+//variable para asignar el ingreso a la sesion
+let headerLogin = document.getElementById("headerLogin")
+//boton que permite guardar el nombre ingresado por el usuario
+const botonLogin = document.getElementById("botonLog");
+//boton que permite registrar el usuario
+const botonRegistro = document.getElementById("botonRegistro");
+
 
 //variable para agregar info de ubicacion
 let ubicacion=document.getElementById("ubicacion");
+//variable para juntar la informacion y llevarla a otra parte del codigo->btnFinalizarCompra
 let ubicacionEnvio
 fetch('https://api.getgeoapi.com/v2/ip/check?api_key=e54eecc4dbf75015bfa538699b0e61bd4784ee86&format={jason}')
 	.then(response => response.json())
@@ -46,7 +48,7 @@ fetch('https://api.getgeoapi.com/v2/ip/check?api_key=e54eecc4dbf75015bfa538699b0
         console.log(data);
         ubicacionEnvio=data.city.name
         ciudad = document.createElement("div");
-        ciudad.innerHTML=`<h2>Nuestros envíos llegan a <b>${ubicacionEnvio}</b>!</h2>`
+        ciudad.innerHTML=`<h5>Nuestros envíos llegan exitosamente hasta <b>${ubicacionEnvio}</b>!</h5>`
         ubicacion.append(ciudad);
     })
 	.catch(err => console.error(err));
@@ -245,9 +247,6 @@ function mostrarLoginLayout(usuario){
 
 //BARRA DE BUSQUEDA
 
-
-let buscador
-buscador=document.getElementById("buscador")
 buscador.addEventListener("input",()=>{
 
     if(buscador.value!==""){
@@ -257,8 +256,6 @@ buscador.addEventListener("input",()=>{
         compararProductoBusqueda(palabraFiltrada)
     }
 })
-
-
 
 // funcion de comparar la palabra ingresada con el nombre de los articulos
 //Borra productos fuera del buscador
@@ -341,7 +338,6 @@ btnFinalizarCompra.addEventListener("click",()=>{
         prod.stock=prod.stockTope
         prod.sumCarrito=1;
     }
-
     carrito.length=0;
     actualizarCarrito()
     crearLayout(listaProductosConStock)
