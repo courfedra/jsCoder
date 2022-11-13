@@ -12,8 +12,13 @@ let palabraFiltrada=""
 let carrito=[]
 //Variable para guardar el nombre del usuario al iniciar sesion
 let nombreComprador;
+//variable que guarda los elementos filtrados por checkbox
+let nuevaLista=[]
 
-
+//botones para filtrar por categoria
+let filtroMacetas = document.getElementById('macetaFiltro')
+let filtroArboles = document.getElementById('arbolFiltro')
+let filtroFlores = document.getElementById('florFiltro')
 //boton para borrar storage
 let btnBorrarStorage=document.getElementById("btnBorrarStorage")
 //variable donde ingresan la palabra a buscar
@@ -263,8 +268,8 @@ function compararProductoBusqueda(letraPalabra){
     if(letraPalabra!==0){
         arrayProductosFiltrados=[]
         for(prod of listaProductosConStock){
-                letraPalabra=letraPalabra.toLowerCase()
-                let nombreProducto=prod.nombre.toLowerCase()
+            letraPalabra=letraPalabra.toLowerCase()
+            let nombreProducto=prod.nombre.toLowerCase()
             if(nombreProducto.includes(letraPalabra)){
                 arrayProductosFiltrados.push(prod)
             }
@@ -487,6 +492,41 @@ const actualizarCarrito = () =>{
 }
 
 
+//function que filtra por la categoria seleccionada y muetra el layout actualizado
+function filtrarCategoriaAgregada(categoriaElegida){
+    for(const elem of listaProductosConStock){
+        if(elem.categoria==categoriaElegida){
+            nuevaLista.push(elem)
+        }
+    }
+    crearLayout(nuevaLista)
+}
+
+//function que filtra por la categoria seleccionada y muetra el layout actualizado
+//ARREGLAR ELIMINAR CHECKCOMPLETO
+function filtrarCategoriaEliminada(categoriaElegida){
+    let indice
+    for(const elem of nuevaLista){
+        indice=nuevaLista.indexOf(elem)
+        console.log("El indice es "+indice)
+        if(elem.categoria==categoriaElegida){
+            nuevaLista.splice(indice,1)
+
+        }
+    }
+    crearLayout(nuevaLista)
+}
+
+
+filtroArboles.addEventListener('click',()=>{
+    filtroArboles.checked ? filtrarCategoriaAgregada("arbol"):filtrarCategoriaEliminada("arbol")
+})
+filtroMacetas.addEventListener('click',()=>{
+    filtroMacetas.checked ? filtrarCategoriaAgregada("maceta"):filtrarCategoriaEliminada("maceta")
+})
+filtroFlores.addEventListener('click',()=>{
+    filtroFlores.checked ? filtrarCategoriaAgregada("flor"):filtrarCategoriaEliminada("flor")
+})
 
 //boton para borrar storage ante cualquier necesidad del desarrollador o el tester
 btnBorrarStorage.addEventListener("click",()=>{

@@ -36,14 +36,14 @@
                 <i class="fa-solid fa-cart-shopping"></i>
             </button>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                
+
                 <div class="offcanvas-header">
                     <h2 id="nombreCarrito"></h2>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
             <!--RELLENO DE CARRITO-->
                 <div id="carritoArticulos" class="offcanvas-body">
-                
+
                 </div>
             <!--FIN RELLENO DE CARRITO-->
                 <div id="precioTotal">
@@ -52,7 +52,7 @@
                 </div>
                 <button type="button" class="btn btn-vaciarCarrito" id="botonVaciarCarrito">Vaciar Carrito</button>
                 <button type="button" class="btn btn-finalizarCompra" id="botonFinalizarCompra">Finalizar Compra</button>
-            
+
             </div>
         </div>
     </nav>
@@ -60,12 +60,25 @@
         <input type="text" id="buscador" placeholder="Buscar...">
     </div>
     <main class="principal">
+        <section class="filtros">
+            <div class="filtrosArticulos">
+                <label for="florFiltro">Flores</label>
+                <input type="checkbox" id="florFiltro">
+            </div>
+            <div class="filtrosArticulos">
+                <label for="arbolFiltro">Arboles</label>
+                <input type="checkbox" id="arbolFiltro">
+            </div>
+            <div class="filtrosArticulos">
+                <label for="macetaFiltro">Macetas</label>
+                <input type="checkbox" id="macetaFiltro">
+            </div>
+        </section>
         <section id="catalogoVentas"></section>
     </main>
     <footer class="footerInformativo">
         <button id="btnBorrarStorage">Borrar Storage</button>
     </footer>
-    
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/a7eb31baec.js" crossorigin="anonymous"></script>
     <!-- JavaScript Bundle with Popper -->
