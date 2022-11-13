@@ -503,18 +503,26 @@ function filtrarCategoriaAgregada(categoriaElegida){
 }
 
 //function que filtra por la categoria seleccionada y muetra el layout actualizado
-//ARREGLAR ELIMINAR CHECKCOMPLETO
 function filtrarCategoriaEliminada(categoriaElegida){
-    let indice
-    for(const elem of nuevaLista){
-        indice=nuevaLista.indexOf(elem)
-        console.log("El indice es "+indice)
-        if(elem.categoria==categoriaElegida){
-            nuevaLista.splice(indice,1)
+    /*No utilize splice porque me salteaba elementos y no los borraba de la lista correctamente*/
 
+    //creo nuevo arreglo para guardar lista nueva
+    let listaReemplazante=[]
+    if (nuevaLista.length!=0){
+        for(const elem of nuevaLista){
+            if(elem.categoria!==categoriaElegida){
+                listaReemplazante.push(elem);
+            }
         }
+        nuevaLista.length=0
+        nuevaLista = nuevaLista.concat(listaReemplazante)
+        crearLayout(nuevaLista)
     }
-    crearLayout(nuevaLista)
+    //Si no hay categoria elegida, creo la lista original
+    if(!(filtroArboles.checked)&&!(filtroMacetas.checked)&&!(filtroFlores.checked)){
+        console.log("Entre al todos false")
+        crearLayout(listaProductosConStock)
+    }
 }
 
 
