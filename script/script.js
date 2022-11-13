@@ -349,9 +349,9 @@ btnFinalizarCompra.addEventListener("click",()=>{
 const agregarCarrito = (prodId) => {
 
     //controlar cantidad de stock para permitir compra
-    const item = listaProductosConStock.find((prod)=>prod.id===prodId)
+    const item = listaProductosConStock.find((prod)=>prod.id==prodId)
     //variable para saber que hacer si esta repetido
-    let itemRepetido = carrito.some((prod)=>prod.id===item.id)
+    let itemRepetido = carrito.some((prod)=>prod.id==item.id)
     //controlo que la compra no supere la cantidad de stock
     if(item.stock >0){
         //si esta repetido, aumento el contador de sumCarrito
@@ -383,7 +383,7 @@ const agregarCarrito = (prodId) => {
 //Agregar unidades del producto al carrito
 const agregarUnidadCarrito = (prodId)=>{
     //Selecciono el item del carrito
-    const item = carrito.find((prod)=>prod.id === prodId)
+    const item = carrito.find((prod)=>prod.id == prodId)
     //consulto el stock actual del item en carrito y procedo a if
     item.sumCarrito<item.stockTope && agregarCarrito(prodId);
     guardarStorageLayout()
@@ -395,7 +395,7 @@ const agregarUnidadCarrito = (prodId)=>{
 //restar unidades del producto del carrito
 const eliminarUnidadCarrito = (prodId)=>{
     //Selecciono el item del carrito
-    const item = carrito.find((prod)=>prod.id === prodId)
+    const item = carrito.find((prod)=>prod.id == prodId)
     //consulto el stock actual del item en carrito y procedo a if
     if (item.sumCarrito>1){
         item.sumCarrito-=1
@@ -421,7 +421,7 @@ const eliminarUnidadCarrito = (prodId)=>{
 //Elimiar producto especifico del carrito
 const eliminarCarrito = (prodId)=>{
     //Selecciono el item del carrito
-    const item = carrito.find((prod)=>prod.id === prodId)
+    const item = carrito.find((prod)=>prod.id == prodId)
     //busco indice donde esta el item a retirar
     const indice = carrito.indexOf(item)
     //elimino el articulo
