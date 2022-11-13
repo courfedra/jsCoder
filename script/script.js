@@ -59,19 +59,6 @@ fetch('https://api.getgeoapi.com/v2/ip/check?api_key=e54eecc4dbf75015bfa538699b0
 	.catch(err => console.error(err));
 
 
-
-//funcion para crear los objetos en caso de no tener registros previos de ellos
-function crearObjetos(){
-    listaProductosCompleta = listaFlores.concat(listaArboles,listaMacetas)
-
-    listaProductosConStock = listaProductosCompleta.filter((elemento)=>elemento.stock>0);
-
-    //Prepara una lista de solo los nombres de los productos que tienen stock
-    for(const producto of listaProductosConStock){
-        listaProductosNombre.push(producto.nombre);
-    }
-}
-
 //funcion para crear y actualizar el layout con las interacciones del usuario
 function crearLayout(listaProductosLayout){
     catalogo.innerHTML =""
@@ -520,7 +507,6 @@ function filtrarCategoriaEliminada(categoriaElegida){
     }
     //Si no hay categoria elegida, creo la lista original
     if(!(filtroArboles.checked)&&!(filtroMacetas.checked)&&!(filtroFlores.checked)){
-        console.log("Entre al todos false")
         crearLayout(listaProductosConStock)
     }
 }
@@ -553,7 +539,17 @@ btnBorrarStorage.addEventListener("click",()=>{
 
 //CARGO TODA LA PAGINA POR PRIMERA VEZ, COMPROBANDO STORAGE Y CARGANDO LA INFORMACION
 //
+
+
 comprobarStorage()
 cargarCarritoStorage()
-crearLayout(listaProductosConStock)
 actualizarCarrito()
+//tomo datos de Json y los cargo en la variable de elementos stocks
+fetch('data.json')
+	.then(response => response.json())
+	.then(data => {
+        //creo la lista con los productos con stock mayor a 0
+        listaProductosConStock = data.filter((elemento)=>elemento.stock>0);
+        crearLayout(listaProductosConStock)
+    })
+	.catch(err => console.error(err));

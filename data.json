@@ -1,0 +1,303 @@
+[
+    {
+        "id":"1",
+        "sumCarrito":"1",
+        "nombre":"Flor Roja",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florRoja.jpg"
+    },
+    {
+        "id":"2",
+        "sumCarrito":"1",
+        "nombre":"Flor Blanca",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florBlanca.jpg"
+    },
+    {
+        "id":"3",
+        "sumCarrito":"1",
+        "nombre":"Flor Azul",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florAzul.jpg"
+    },
+    {
+        "id":"4",
+        "sumCarrito":"1",
+        "nombre":"Flor Amarilla",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florAmarilla.jpg"
+    },
+    {
+        "id":"5",
+        "sumCarrito":"1",
+        "nombre":"Flor Naranja",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florNaranja.jpg"
+    },
+    {
+        "id":"6",
+        "sumCarrito":"1",
+        "nombre":"Flor Rosa",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florRosa.jpg"
+    },
+    {
+        "id":"7",
+        "sumCarrito":"1",
+        "nombre":"Flor Verde",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florVerde.jpg"
+    },
+    {
+        "id":"8",
+        "sumCarrito":"1",
+        "nombre":"Flor Negra",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florNegra.jpg"
+    },
+    {
+        "id":"9",
+        "sumCarrito":"1",
+        "nombre":"Flor Violeta",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florVioleta.jpg"
+    },
+    {
+        "id":"10",
+        "sumCarrito":"1",
+        "nombre":"Flor Multicolor",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"flor",
+        "img":"./img/florMulticolor.jpg"
+    },
+    {
+        "id":"101",
+        "sumCarrito":"1",
+        "nombre":"Arbol Cereza",
+        "precio":"120",
+        "stock":"7",
+        "stockTope":"7",
+        "categoria":"arbol",
+        "img":"./img/arbolCereza.jpg"
+    },
+    {
+        "id":"102",
+        "sumCarrito":"1",
+        "nombre":"Arbol Almendra",
+        "precio":"150",
+        "stock":"9",
+        "stockTope":"9",
+        "categoria":"arbol",
+        "img":"./img/arbolAlmendra.jpg"
+    },
+    {
+        "id":"103",
+        "sumCarrito":"1",
+        "nombre":"Arbol Ciruela",
+        "precio":"100",
+        "stock":"5",
+        "stockTope":"5",
+        "categoria":"arbol",
+        "img":"./img/arbolCiruela.jpg"
+    },
+    {
+        "id":"104",
+        "sumCarrito":"1",
+        "nombre":"Arbol Durazno",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"arbol",
+        "img":"./img/arbolDurazno.jpg"
+    },
+    {
+        "id":"105",
+        "sumCarrito":"1",
+        "nombre":"Arbol Damasco",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"arbol",
+        "img":"./img/arbolDamasco.jpg"
+    },
+    {
+        "id":"106",
+        "sumCarrito":"1",
+        "nombre":"Arbol Limon",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"arbol",
+        "img":"./img/arbolLimon.jpg"
+    },
+    {
+        "id":"107",
+        "sumCarrito":"1",
+        "nombre":"Arbol Higo",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"arbol",
+        "img":"./img/arbolHigo.jpg"
+    },
+    {
+        "id":"108",
+        "sumCarrito":"1",
+        "nombre":"Arbol Manzana",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"arbol",
+        "img":"./img/arbolManzana.jpg"
+    },
+    {
+        "id":"109",
+        "sumCarrito":"1",
+        "nombre":"Arbol Mandarina",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"arbol",
+        "img":"./img/arbolMandarina.jpg"
+    },
+    {
+        "id":"110",
+        "sumCarrito":"1",
+        "nombre":"Arbol Naranja",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"arbol",
+        "img":"./img/arbolNaranja.jpg"
+    },
+    {
+        "id":"201",
+        "sumCarrito":"1",
+        "nombre":"Maceta Roja",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaRoja.jpg"
+    },
+    {
+        "id":"202",
+        "sumCarrito":"1",
+        "nombre":"Maceta Blanca",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaBlanca.jpg"
+    },
+    {
+        "id":"203",
+        "sumCarrito":"1",
+        "nombre":"Maceta Azul",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaAzul.jpg"
+    },
+    {
+        "id":"204",
+        "sumCarrito":"1",
+        "nombre":"Maceta Amarilla",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaAmarilla.jpg"
+    },
+    {
+        "id":"205",
+        "sumCarrito":"1",
+        "nombre":"Maceta Naranja",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaNaranja.jpg"
+    },
+    {
+        "id":"206",
+        "sumCarrito":"1",
+        "nombre":"Maceta Rosa",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaRosa.jpg"
+    },
+    {
+        "id":"207",
+        "sumCarrito":"1",
+        "nombre":"Maceta Verde",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaVerde.jpg"
+    },
+    {
+        "id":"208",
+        "sumCarrito":"1",
+        "nombre":"Maceta Negra",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaNegra.jpg"
+    },
+    {
+        "id":"209",
+        "sumCarrito":"1",
+        "nombre":"Maceta Violeta",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaVioleta.jpg"
+    },
+    {
+        "id":"210",
+        "sumCarrito":"1",
+        "nombre":"Maceta Multicolor",
+        "precio":"150",
+        "stock":"10",
+        "stockTope":"10",
+        "categoria":"maceta",
+        "img":"./img/macetaMulticolor.jpg"
+    }
+]
+
