@@ -296,19 +296,4 @@ body .footerInformativo {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-body .footerInformativo #btnBorrarStorage {
-  background-color: red;
-  color: white;
-  letter-spacing: 2px;
-  border-radius: 5px;
-  padding: 5px;
-  border: 2px solid white;
-  box-shadow: 2px 2px 20px 10px white;
-}
-body .footerInformativo #btnBorrarStorage:hover {
-  background-color: white;
-  color: red;
-  border: 2px solid red;
-  box-shadow: 2px 2px 20px 10px red;
 }/*# sourceMappingURL=styles.css.map */

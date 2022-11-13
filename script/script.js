@@ -19,8 +19,7 @@ let nuevaLista=[]
 let filtroMacetas = document.getElementById('macetaFiltro')
 let filtroArboles = document.getElementById('arbolFiltro')
 let filtroFlores = document.getElementById('florFiltro')
-//boton para borrar storage
-let btnBorrarStorage=document.getElementById("btnBorrarStorage")
+
 //variable donde ingresan la palabra a buscar
 let buscador=document.getElementById("buscador")
 //variable donde almacenaremos los productos agregados al carrito
@@ -93,13 +92,22 @@ function comprobarStorage(){
     //asignamos a valor Jason el contenido, si es que tiene, para proceder a llenarlo o recuperar informacion
     let valorJson=JSON.parse(localStorage.getItem('listaProductosConStock'))
     if (valorJson==null){
-        crearObjetos()
+        //tomo datos de Json y los cargo en la variable de elementos stocks
+        fetch('data.json')
+        .then(response => response.json())
+        .then(data => {
+            //creo la lista con los productos con stock mayor a 0
+            listaProductosConStock = data.filter((elemento)=>elemento.stock>0);
+            crearLayout(listaProductosConStock)
+        })
+        .catch(err => console.error(err));
         localStorage.setItem("carrito",JSON.stringify(carrito))
         localStorage.setItem("listaProductosConStock",JSON.stringify(listaProductosConStock))
         listaProductosConStock=JSON.parse(localStorage.getItem('listaProductosConStock'))
     }else{
         listaProductosConStock=JSON.parse(localStorage.getItem('listaProductosConStock'));
         carrito=JSON.parse(localStorage.getItem('carrito'))
+        crearLayout(listaProductosConStock)
 
     }
 }
@@ -522,20 +530,6 @@ filtroFlores.addEventListener('click',()=>{
     filtroFlores.checked ? filtrarCategoriaAgregada("flor"):filtrarCategoriaEliminada("flor")
 })
 
-//boton para borrar storage ante cualquier necesidad del desarrollador o el tester
-btnBorrarStorage.addEventListener("click",()=>{
-    localStorage.clear();
-    Toastify({
-        text: "Storage Borrado, RECARGUE LA PÁGINA",
-        className: "info",
-        gravity:"bottom",
-        position:"left",
-        style: {
-          background: "#d10000",
-          color:"#ffffff"
-        }
-      }).showToast();
-})
 
 //CARGO TODA LA PAGINA POR PRIMERA VEZ, COMPROBANDO STORAGE Y CARGANDO LA INFORMACION
 //
@@ -544,12 +538,3 @@ btnBorrarStorage.addEventListener("click",()=>{
 comprobarStorage()
 cargarCarritoStorage()
 actualizarCarrito()
-//tomo datos de Json y los cargo en la variable de elementos stocks
-fetch('data.json')
-	.then(response => response.json())
-	.then(data => {
-        //creo la lista con los productos con stock mayor a 0
-        listaProductosConStock = data.filter((elemento)=>elemento.stock>0);
-        crearLayout(listaProductosConStock)
-    })
-	.catch(err => console.error(err));
