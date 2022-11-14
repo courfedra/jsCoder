@@ -1,10 +1,12 @@
 @import "variables";
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     color: map-get($paletaColores,'negro');
+    font-family: 'Fredoka One', cursive;
 }
 
 
@@ -32,7 +34,6 @@ body{
                 .cerrarSesion{
                     border:1px solid map-get($paletaColores, 'marronMadera' );
                 }
-                
             }
         }
         .layoutLogin{
@@ -70,7 +71,6 @@ body{
                         }
                     }
                 }
-                
             }
             .botonUsuario{
                 align-self: center;
@@ -80,7 +80,6 @@ body{
                     border: 1px solid map-get($paletaColores,'verdeOscuro');
                     border-radius: 2.5px;
                     background-color: map-get($paletaColores,'verdeOscuro');
-                    
                     &:hover{
                         background-color: map-get($paletaColores,'verdeClaro');
                     }
@@ -91,21 +90,17 @@ body{
                         color: map-get($paletaColores, 'blancoHueso');
                         padding: 0 5px;
                         letter-spacing: 2px
-                    }  
+                    }
                 }
                 #botonRegistro{
                     @extend #botonLog;
                     background-color: map-get($paletaColores, 'verdeSeco' );
                     i{
                         color: map-get($paletaColores, 'negroMadera');
-                    }  
+                    }
                 }
             }
         }
-        
-        
-        
-        
     }
     .navbar{
         background-color: map-get($paletaColores, 'verdeSeco' );
@@ -139,7 +134,6 @@ body{
                     border: 1px solid map-get($paletaColores, 'verdeSeco' );
                 }
             }
-            
             #carritoArticulos{
                 display: flex;
                 flex-direction: column;
@@ -160,7 +154,6 @@ body{
                         margin: 2.5px;
                         border-radius: 15px;
                         background-color: map-get($paletaColores, 'verdeSeco' );
-                        
                     }
                     #seguirAgregandoCarrito{
                         border: none;
@@ -168,7 +161,6 @@ body{
                         border-radius: 20px;
                         border: 1px solid map-get($paletaColores, 'verdeOscuro' );
                         text-align: center;
-                        
                     }
                     .botonesCarrito{
                         display: flex;
@@ -190,26 +182,26 @@ body{
         }
     }
     .navegador{
-        width: 100%;
-        background-color: #1bfa1b33;
+        width: 75%;
         display: flex;
         justify-content: center;
-        text-align: center;
         padding: 5px 0;
         #buscador{
             border-color: #00aa00;
-            border-radius: 10px;
+            border-radius: 30px;
             padding: 5px;
-            margin:10px 0;
             width: 50%;
             align-self: center;
         }
-        .filtros{
-            display: flex;
-            justify-content: space-around;
-            .filtroColores{
-                padding: 5px;
-            }
+    }
+    #ubicacion{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5px;
+        h5{
+            font-size: 1.5em;
         }
     }
     .principal{
@@ -227,6 +219,7 @@ body{
                 width: 33%;
                 text-align: center;
                 margin: 5px;
+                background-color: map-get($paletaColores,'verdeClaro' );
                 &:hover{
                     background-color: map-get($paletaColores,'verdeSeco' );
                 }
@@ -238,6 +231,7 @@ body{
             flex-wrap: wrap;
             justify-content: space-evenly;
             align-items: center;
+            min-height: 75vh;
             .hidden{
                 display: none;
             }
@@ -249,7 +243,7 @@ body{
                 margin: 10px;
                 align-items: center;
                 text-align: justify;
-                background-color: #00ff0075;   
+                background-color: #00ff0075;
                 box-shadow: 0px 0px 10px #00aa00ff;
                 border-radius: 7.5px;
                 h2{
@@ -299,14 +293,44 @@ body{
                     }
                 }
             }
+            .articuloNotFound{
+                @extend .articulo;
+                background-color: map-get($paletaColores, 'marronMadera' );
+                box-shadow: 0px 0px 50px map-get($paletaColores, 'negroMadera' );
+            }
         }
     }
-    .footerInformativo{
-        background-color: #3c3d01;
+    .footer{
+        background-color: map-get($paletaColores,'verdeClaro');
         min-height: 15vh;
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        text-align: center;
+        .footerInformativo{
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            .seccionFooter{
+                display: flex;
+                flex-direction: column;
+                list-style: none;
+                padding: 5px;
+                font-size: 20px;
+                a{
+                    text-decoration: none;
+                    color: map-get($paletaColores,'negro');
+                    i{margin: 5px;}
+                }
+                a:hover{
+                    color: map-get($paletaColores,'blancoHueso');
+                    i{
+                        color: map-get($paletaColores,'negroMadera');
+                    }
+                }
+            }
+        }
+        .copyRight{
+            border-top: 2px solid map-get($paletaColores,'verdeOscuro');
+            padding: 5px;
+        }
     }
 }

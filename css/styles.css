@@ -1,8 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   color: #000000;
+  font-family: "Fredoka One", cursive;
 }
 
 body header {
@@ -178,27 +180,27 @@ body .navbar #carrito #carritoArticulos .articuloEnCarrito .botonesCarrito .btnA
   color: #af8300;
 }
 body .navegador {
-  width: 100%;
-  background-color: rgba(27, 250, 27, 0.2);
+  width: 75%;
   display: flex;
   justify-content: center;
-  text-align: center;
   padding: 5px 0;
 }
 body .navegador #buscador {
   border-color: #00aa00;
-  border-radius: 10px;
+  border-radius: 30px;
   padding: 5px;
-  margin: 10px 0;
   width: 50%;
   align-self: center;
 }
-body .navegador .filtros {
+body #ubicacion {
+  width: 100%;
   display: flex;
-  justify-content: space-around;
-}
-body .navegador .filtros .filtroColores {
+  justify-content: center;
+  align-items: center;
   padding: 5px;
+}
+body #ubicacion h5 {
+  font-size: 1.5em;
 }
 body .principal {
   width: 100%;
@@ -217,6 +219,7 @@ body .principal .filtros .filtrosArticulos {
   width: 33%;
   text-align: center;
   margin: 5px;
+  background-color: #69ab3d;
 }
 body .principal .filtros .filtrosArticulos:hover {
   background-color: #aed36c;
@@ -227,11 +230,12 @@ body .principal #catalogoVentas {
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: center;
+  min-height: 75vh;
 }
 body .principal #catalogoVentas .hidden {
   display: none;
 }
-body .principal #catalogoVentas .articulo {
+body .principal #catalogoVentas .articulo, body .principal #catalogoVentas .articuloNotFound {
   display: flex;
   flex-direction: column;
   width: 250px;
@@ -243,57 +247,88 @@ body .principal #catalogoVentas .articulo {
   box-shadow: 0px 0px 10px #00aa00;
   border-radius: 7.5px;
 }
-body .principal #catalogoVentas .articulo h2 {
+body .principal #catalogoVentas .articulo h2, body .principal #catalogoVentas .articuloNotFound h2 {
   text-align: center;
   font-size: 24px;
 }
-body .principal #catalogoVentas .articulo img {
+body .principal #catalogoVentas .articulo img, body .principal #catalogoVentas .articuloNotFound img {
   width: 70%;
   height: 35%;
   border-radius: 10px;
   align-self: center;
 }
-body .principal #catalogoVentas .articulo ul {
+body .principal #catalogoVentas .articulo ul, body .principal #catalogoVentas .articuloNotFound ul {
   list-style: none;
   padding: 5px;
 }
-body .principal #catalogoVentas .articulo .btnCompra {
+body .principal #catalogoVentas .articulo .btnCompra, body .principal #catalogoVentas .articuloNotFound .btnCompra {
   width: 200px;
   border-radius: 5px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
   color: black;
 }
-body .principal #catalogoVentas .articulo .btnEliminar {
+body .principal #catalogoVentas .articulo .btnEliminar, body .principal #catalogoVentas .articuloNotFound .btnEliminar {
   background-color: #ff0000;
 }
-body .principal #catalogoVentas .articulo .sinStock {
+body .principal #catalogoVentas .articulo .sinStock, body .principal #catalogoVentas .articuloNotFound .sinStock {
   background-color: #ff0000;
   border: 2px solid #ff0000;
 }
-body .principal #catalogoVentas .articulo .sinStock:hover {
+body .principal #catalogoVentas .articulo .sinStock:hover, body .principal #catalogoVentas .articuloNotFound .sinStock:hover {
   background-color: rgba(255, 0, 0, 0.2666666667);
 }
-body .principal #catalogoVentas .articulo .sinStock:active {
+body .principal #catalogoVentas .articulo .sinStock:active, body .principal #catalogoVentas .articuloNotFound .sinStock:active {
   background-color: rgba(109, 0, 0, 0.6039215686);
   border: 2px solid #6d0000;
 }
-body .principal #catalogoVentas .articulo .conStock {
+body .principal #catalogoVentas .articulo .conStock, body .principal #catalogoVentas .articuloNotFound .conStock {
   background-color: #00aa00;
   border: 2px solid #00aa00;
 }
-body .principal #catalogoVentas .articulo .conStock:hover {
+body .principal #catalogoVentas .articulo .conStock:hover, body .principal #catalogoVentas .articuloNotFound .conStock:hover {
   background-color: #00aa00;
 }
-body .principal #catalogoVentas .articulo .conStock:active {
+body .principal #catalogoVentas .articulo .conStock:active, body .principal #catalogoVentas .articuloNotFound .conStock:active {
   background-color: #3c3d01;
   border: 2px solid #3c3d01;
 }
-body .footerInformativo {
-  background-color: #3c3d01;
+body .principal #catalogoVentas .articuloNotFound {
+  background-color: #af8300;
+  box-shadow: 0px 0px 50px #463500;
+}
+body .footer {
+  background-color: #69ab3d;
   min-height: 15vh;
   width: 100%;
+  text-align: center;
+}
+body .footer .footerInformativo {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+}
+body .footer .footerInformativo .seccionFooter {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 5px;
+  font-size: 20px;
+}
+body .footer .footerInformativo .seccionFooter a {
+  text-decoration: none;
+  color: #000000;
+}
+body .footer .footerInformativo .seccionFooter a i {
+  margin: 5px;
+}
+body .footer .footerInformativo .seccionFooter a:hover {
+  color: #e9ebed;
+}
+body .footer .footerInformativo .seccionFooter a:hover i {
+  color: #463500;
+}
+body .footer .copyRight {
+  border-top: 2px solid #295d09;
+  padding: 5px;
 }/*# sourceMappingURL=styles.css.map */

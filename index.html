@@ -30,7 +30,9 @@
     </header>
     <nav class="navbar" >
         <div id="carrito" class="container-fluid">
-            <div id="ubicacion"></div>
+            <div class="navegador">
+                <input type="text" id="buscador" placeholder="Buscar...">
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                 <span id="contadorArticulos">0</span>
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -45,20 +47,18 @@
                 <div id="carritoArticulos" class="offcanvas-body">
 
                 </div>
-            <!--FIN RELLENO DE CARRITO-->
+            <!--PRECIO TOTAL CARRITO-->
                 <div id="precioTotal">
-                    <h4>Precio Total:</h4>
-                    <p>0</p>
+
                 </div>
+            <!--BOTONES DENTRO CARRITO-->
                 <button type="button" class="btn btn-vaciarCarrito" id="botonVaciarCarrito">Vaciar Carrito</button>
                 <button type="button" class="btn btn-finalizarCompra" id="botonFinalizarCompra">Finalizar Compra</button>
 
             </div>
         </div>
     </nav>
-    <div class="navegador">
-        <input type="text" id="buscador" placeholder="Buscar...">
-    </div>
+    <div id="ubicacion"></div>
     <main class="principal">
         <section class="filtros">
             <div class="filtrosArticulos">
@@ -76,8 +76,24 @@
         </section>
         <section id="catalogoVentas"></section>
     </main>
-    <footer class="footerInformativo">
-        
+    <footer class="footer">
+        <div class="footerInformativo">
+            <ul class="seccionFooter">
+                <a target="_blank" href="https://www.linkedin.com/in/franandres/"><i class="fa-brands fa-github"></i>GitHub</a>
+                <a target="_blank" href="https://github.com/courfedra"><i class="fa-brands fa-linkedin"></i>Linkedin</a>
+            </ul>
+            <ul class="seccionFooter">
+                <a href="#"><i class="fa-brands fa-facebook"></i>Facebook</a>
+                <a href="#"><i class="fa-brands fa-instagram"></i>Instagram</a>
+            </ul>
+            <ul class="seccionFooter">
+                <a href="#"><i class="fa-solid fa-phone"></i>261 123456789</a>
+                <a href="#"><i class="fa-solid fa-location-dot"></i>Mendoza, Argentina</a>
+            </ul>
+        </div>
+        <div class="copyRight">
+            <h6>Web desarrollada por Francisco Andres</h6>
+        </div>
     </footer>
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/a7eb31baec.js" crossorigin="anonymous"></script>

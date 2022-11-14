@@ -19,7 +19,6 @@ let nuevaLista=[]
 let filtroMacetas = document.getElementById('macetaFiltro')
 let filtroArboles = document.getElementById('arbolFiltro')
 let filtroFlores = document.getElementById('florFiltro')
-
 //variable donde ingresan la palabra a buscar
 let buscador=document.getElementById("buscador")
 //variable donde almacenaremos los productos agregados al carrito
@@ -52,7 +51,7 @@ fetch('https://api.getgeoapi.com/v2/ip/check?api_key=e54eecc4dbf75015bfa538699b0
         console.log(data);
         ubicacionEnvio=data.city.name
         ciudad = document.createElement("div");
-        ciudad.innerHTML=`<h5>Nuestros envíos llegan exitosamente hasta <b>${ubicacionEnvio}</b>!</h5>`
+        ciudad.innerHTML=`<h5>Comprando desde: <b>${ubicacionEnvio}</b></h5>`
         ubicacion.append(ciudad);
     })
 	.catch(err => console.error(err));
@@ -62,7 +61,20 @@ fetch('https://api.getgeoapi.com/v2/ip/check?api_key=e54eecc4dbf75015bfa538699b0
 function crearLayout(listaProductosLayout){
     catalogo.innerHTML =""
 
-    for(const producto of listaProductosLayout){
+    if (listaProductosLayout==0){
+        articulo = document.createElement("div");
+        articulo.className = "articuloNotFound";
+        articulo.innerHTML=`
+        <h2>Producto no encontrado</h2>
+        <img src="./img/notFoundPlant.jpg"></img>
+        <ul>
+            <li><p>..Sin Stock..</p></li>
+            <li><p>..Sin precio..</p></li>
+        </ul>
+        `
+        catalogo.append(articulo);
+    }else{
+        for(const producto of listaProductosLayout){
         articulo = document.createElement("div");
         articulo.className = "articulo";
         articulo.innerHTML=`
@@ -82,6 +94,7 @@ function crearLayout(listaProductosLayout){
         }else{
             botonAgregar.classList.add("conStock")
             botonAgregar.classList.remove("sinStock")
+        }
         }
     }
 }
@@ -267,6 +280,8 @@ function compararProductoBusqueda(letraPalabra){
             let nombreProducto=prod.nombre.toLowerCase()
             if(nombreProducto.includes(letraPalabra)){
                 arrayProductosFiltrados.push(prod)
+            }else{
+                crearLayout(0)
             }
         }
         crearLayout(arrayProductosFiltrados);
