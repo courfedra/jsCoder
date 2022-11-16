@@ -182,7 +182,7 @@ body{
         }
     }
     .navegador{
-        width: 75%;
+        width: 80%;
         display: flex;
         justify-content: center;
         padding: 5px 0;
@@ -190,7 +190,7 @@ body{
             border-color: #00aa00;
             border-radius: 30px;
             padding: 5px;
-            width: 50%;
+            width: 75%;
             align-self: center;
         }
     }
@@ -201,6 +201,9 @@ body{
         align-items: center;
         padding: 5px;
         h5{
+            background-color: map-get($paletaColores,'verdeClaro');
+            padding: .5em;
+            border-radius: 30px;
             font-size: 1.5em;
         }
     }
@@ -246,6 +249,9 @@ body{
                 background-color: #00ff0075;
                 box-shadow: 0px 0px 10px #00aa00ff;
                 border-radius: 7.5px;
+                &:hover{
+                    background-color: map-get($paletaColores, 'verdeSeco');;
+                }
                 h2{
                     text-align: center;
                     font-size: 24px;
@@ -268,28 +274,28 @@ body{
                     color: black;
                 }
                 .btnEliminar{
-                    background-color: #ff0000;
+                    background-color: map-get($paletaColores, 'rojoIntenso');
                 }
                 .sinStock{
-                    background-color: #ff0000;
-                    border: 2px solid #ff0000;
+                    background-color: map-get($paletaColores, 'rojoIntenso');
+                    border: 2px solid map-get($paletaColores, 'rojoIntenso');
                     &:hover{
-                        background-color: #ff000044;
+                        background-color: map-get($paletaColores, 'rojoIntenso');
                     }
                     &:active{
-                        background-color: #6d00009a;
-                        border: 2px solid #6d0000;
+                        background-color: map-get($paletaColores, 'rojoIntenso');
+                        border: 2px solid map-get($paletaColores, 'rojoIntenso');
                     }
                 }
                 .conStock{
-                    background-color: #00aa00;
-                    border: 2px solid #00aa00;
+                    background-color: map-get($paletaColores, 'verdeClaro');
+                    border: 2px solid map-get($paletaColores, 'verdeClaro');;
                     &:hover{
-                        background-color: #00aa00;
+                        background-color: map-get($paletaColores, 'verdeClaro');;
                     }
                     &:active{
-                        background-color: #3c3d01;
-                        border: 2px solid #3c3d01;
+                        background-color: map-get($paletaColores, 'marronMadera');;
+                        border: 2px solid map-get($paletaColores, 'marronMadera');;
                     }
                 }
             }

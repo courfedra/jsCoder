@@ -180,7 +180,7 @@ body .navbar #carrito #carritoArticulos .articuloEnCarrito .botonesCarrito .btnA
   color: #af8300;
 }
 body .navegador {
-  width: 75%;
+  width: 80%;
   display: flex;
   justify-content: center;
   padding: 5px 0;
@@ -189,7 +189,7 @@ body .navegador #buscador {
   border-color: #00aa00;
   border-radius: 30px;
   padding: 5px;
-  width: 50%;
+  width: 75%;
   align-self: center;
 }
 body #ubicacion {
@@ -200,6 +200,9 @@ body #ubicacion {
   padding: 5px;
 }
 body #ubicacion h5 {
+  background-color: #69ab3d;
+  padding: 0.5em;
+  border-radius: 30px;
   font-size: 1.5em;
 }
 body .principal {
@@ -247,6 +250,9 @@ body .principal #catalogoVentas .articulo, body .principal #catalogoVentas .arti
   box-shadow: 0px 0px 10px #00aa00;
   border-radius: 7.5px;
 }
+body .principal #catalogoVentas .articulo:hover, body .principal #catalogoVentas .articuloNotFound:hover {
+  background-color: #aed36c;
+}
 body .principal #catalogoVentas .articulo h2, body .principal #catalogoVentas .articuloNotFound h2 {
   text-align: center;
   font-size: 24px;
@@ -269,29 +275,29 @@ body .principal #catalogoVentas .articulo .btnCompra, body .principal #catalogoV
   color: black;
 }
 body .principal #catalogoVentas .articulo .btnEliminar, body .principal #catalogoVentas .articuloNotFound .btnEliminar {
-  background-color: #ff0000;
+  background-color: #d10000;
 }
 body .principal #catalogoVentas .articulo .sinStock, body .principal #catalogoVentas .articuloNotFound .sinStock {
-  background-color: #ff0000;
-  border: 2px solid #ff0000;
+  background-color: #d10000;
+  border: 2px solid #d10000;
 }
 body .principal #catalogoVentas .articulo .sinStock:hover, body .principal #catalogoVentas .articuloNotFound .sinStock:hover {
-  background-color: rgba(255, 0, 0, 0.2666666667);
+  background-color: #d10000;
 }
 body .principal #catalogoVentas .articulo .sinStock:active, body .principal #catalogoVentas .articuloNotFound .sinStock:active {
-  background-color: rgba(109, 0, 0, 0.6039215686);
-  border: 2px solid #6d0000;
+  background-color: #d10000;
+  border: 2px solid #d10000;
 }
 body .principal #catalogoVentas .articulo .conStock, body .principal #catalogoVentas .articuloNotFound .conStock {
-  background-color: #00aa00;
-  border: 2px solid #00aa00;
+  background-color: #69ab3d;
+  border: 2px solid #69ab3d;
 }
 body .principal #catalogoVentas .articulo .conStock:hover, body .principal #catalogoVentas .articuloNotFound .conStock:hover {
-  background-color: #00aa00;
+  background-color: #69ab3d;
 }
 body .principal #catalogoVentas .articulo .conStock:active, body .principal #catalogoVentas .articuloNotFound .conStock:active {
-  background-color: #3c3d01;
-  border: 2px solid #3c3d01;
+  background-color: #af8300;
+  border: 2px solid #af8300;
 }
 body .principal #catalogoVentas .articuloNotFound {
   background-color: #af8300;
