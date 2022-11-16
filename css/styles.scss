@@ -334,3 +334,41 @@ body{
         }
     }
 }
+
+@media (max-width: 540px){
+    body{
+        .footer{
+            background-color: map-get($paletaColores,'verdeClaro');
+            min-height: 15vh;
+            width: 100%;
+            text-align: center;
+            .footerInformativo{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .seccionFooter{
+                    display: flex;
+                    flex-direction: column;
+                    list-style: none;
+                    padding: 5px;
+                    font-size: 20px;
+                    a{
+                        text-decoration: none;
+                        color: map-get($paletaColores,'negro');
+                        i{margin: 5px;}
+                    }
+                    a:hover{
+                        color: map-get($paletaColores,'blancoHueso');
+                        i{
+                            color: map-get($paletaColores,'negroMadera');
+                        }
+                    }
+                }
+            }
+            .copyRight{
+                border-top: 2px solid map-get($paletaColores,'verdeOscuro');
+                padding: 5px;
+            }
+        }
+    }
+}
